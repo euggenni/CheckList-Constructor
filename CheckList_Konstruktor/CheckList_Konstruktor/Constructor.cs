@@ -24,7 +24,7 @@ namespace CheckList_Konstruktor
 
         private void Constructor_Load(object sender, EventArgs e)
         {
-            label5.Text = Checks.Name;
+            label5.Text = Checks.Inform.Name;
             /*CheckList Checker = new CheckList("Гкчп", "Ектенчукс", new List<Task>(), new Marks(1, 2, 3));
             Checker.AddTask(new Task("Велосипед","Краксеньпукс", null));
             Checker.AddTask(new Task("Анчоус", "Семен бородач", null));*/
@@ -97,7 +97,7 @@ namespace CheckList_Konstruktor
             String Data = JsonConvert.SerializeObject(Checks);
             try
             {
-                File.WriteAllText("CheckList\\" + Checks.Course + " " + Checks.Name + ".test", Data);
+                File.WriteAllText("CheckList\\" + Checks.Inform.Course + " " + Checks.Inform.Name + ".test", Data);
             }
             catch (Exception)
             {
@@ -150,7 +150,7 @@ namespace CheckList_Konstruktor
         private string ImageToString(Image Pic, int Number) //сохраняет картинку в папке Picture, возвращает ее имя
         {
             string Name = "";
-            Name = Checks.Course + " " + Checks.Name + Number.ToString() + ".bmp";
+            Name = Checks.Inform.Course + " " + Checks.Inform.Name + Number.ToString() + ".bmp";
             try
             {
                 Pic.Save("CheckList\\Pictures\\" + Name, System.Drawing.Imaging.ImageFormat.Bmp);
@@ -168,6 +168,17 @@ namespace CheckList_Konstruktor
             ReadToCheckList();
             Checks.ExportToWord();
             Checks.Tasks.Clear();
+        }
+
+        private void добавитьудалитьПолеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddPole Pole = new AddPole(tableLayoutPanel1);
+            Pole.Show();
+        }
+
+        private void добавитьКарточкЗаданияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
