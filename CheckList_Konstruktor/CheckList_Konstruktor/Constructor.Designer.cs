@@ -34,6 +34,9 @@
             this.экспортВWordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.настройкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.добавитьудалитьПолеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.добавитьКарточкЗаданияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.редактироватьПредметыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.редактироватьВзводаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.справкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.помощьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label5 = new System.Windows.Forms.Label();
@@ -45,9 +48,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.добавитьКарточкЗаданияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.редактироватьПредметыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.редактироватьВзводаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -102,9 +102,29 @@
             // добавитьудалитьПолеToolStripMenuItem
             // 
             this.добавитьудалитьПолеToolStripMenuItem.Name = "добавитьудалитьПолеToolStripMenuItem";
-            this.добавитьудалитьПолеToolStripMenuItem.Size = new System.Drawing.Size(219, 22);
+            this.добавитьудалитьПолеToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.добавитьудалитьПолеToolStripMenuItem.Text = "Добавить/удалить поле";
             this.добавитьудалитьПолеToolStripMenuItem.Click += new System.EventHandler(this.добавитьудалитьПолеToolStripMenuItem_Click);
+            // 
+            // добавитьКарточкЗаданияToolStripMenuItem
+            // 
+            this.добавитьКарточкЗаданияToolStripMenuItem.Name = "добавитьКарточкЗаданияToolStripMenuItem";
+            this.добавитьКарточкЗаданияToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.добавитьКарточкЗаданияToolStripMenuItem.Text = "Добавить карточку задания";
+            this.добавитьКарточкЗаданияToolStripMenuItem.Click += new System.EventHandler(this.добавитьКарточкЗаданияToolStripMenuItem_Click);
+            // 
+            // редактироватьПредметыToolStripMenuItem
+            // 
+            this.редактироватьПредметыToolStripMenuItem.Name = "редактироватьПредметыToolStripMenuItem";
+            this.редактироватьПредметыToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.редактироватьПредметыToolStripMenuItem.Text = "Редактировать предметы";
+            this.редактироватьПредметыToolStripMenuItem.Click += new System.EventHandler(this.редактироватьПредметыToolStripMenuItem_Click);
+            // 
+            // редактироватьВзводаToolStripMenuItem
+            // 
+            this.редактироватьВзводаToolStripMenuItem.Name = "редактироватьВзводаToolStripMenuItem";
+            this.редактироватьВзводаToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.редактироватьВзводаToolStripMenuItem.Text = "Редактировать взвода";
             // 
             // справкаToolStripMenuItem
             // 
@@ -157,7 +177,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.36842F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52.63158F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 245F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 170F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 176F));
             this.tableLayoutPanel1.Controls.Add(this.label4, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 1, 0);
@@ -167,8 +187,8 @@
             this.tableLayoutPanel1.MinimumSize = new System.Drawing.Size(655, 35);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(655, 50);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 51F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(655, 53);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // label4
@@ -176,9 +196,9 @@
             this.label4.AutoSize = true;
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(486, 1);
+            this.label4.Location = new System.Drawing.Point(480, 1);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(165, 48);
+            this.label4.Size = new System.Drawing.Size(171, 51);
             this.label4.TabIndex = 3;
             this.label4.Text = "Контроль";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -188,9 +208,9 @@
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(240, 1);
+            this.label3.Location = new System.Drawing.Point(234, 1);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(239, 48);
+            this.label3.Size = new System.Drawing.Size(239, 51);
             this.label3.TabIndex = 2;
             this.label3.Text = "Порядок выполнения";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -200,9 +220,9 @@
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(116, 1);
+            this.label2.Location = new System.Drawing.Point(113, 1);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(117, 48);
+            this.label2.Size = new System.Drawing.Size(114, 51);
             this.label2.TabIndex = 1;
             this.label2.Text = "Название действия";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -214,7 +234,7 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(4, 1);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(105, 48);
+            this.label1.Size = new System.Drawing.Size(102, 51);
             this.label1.TabIndex = 0;
             this.label1.Text = "№ действия";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -232,25 +252,6 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // добавитьКарточкЗаданияToolStripMenuItem
-            // 
-            this.добавитьКарточкЗаданияToolStripMenuItem.Name = "добавитьКарточкЗаданияToolStripMenuItem";
-            this.добавитьКарточкЗаданияToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
-            this.добавитьКарточкЗаданияToolStripMenuItem.Text = "Добавить карточку задания";
-            this.добавитьКарточкЗаданияToolStripMenuItem.Click += new System.EventHandler(this.добавитьКарточкЗаданияToolStripMenuItem_Click);
-            // 
-            // редактироватьПредметыToolStripMenuItem
-            // 
-            this.редактироватьПредметыToolStripMenuItem.Name = "редактироватьПредметыToolStripMenuItem";
-            this.редактироватьПредметыToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
-            this.редактироватьПредметыToolStripMenuItem.Text = "Редактировать предметы";
-            // 
-            // редактироватьВзводаToolStripMenuItem
-            // 
-            this.редактироватьВзводаToolStripMenuItem.Name = "редактироватьВзводаToolStripMenuItem";
-            this.редактироватьВзводаToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
-            this.редактироватьВзводаToolStripMenuItem.Text = "Редактировать взвода";
-            // 
             // Constructor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -264,6 +265,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Constructor";
             this.Text = "Конструктор";
+            this.Activated += new System.EventHandler(this.Constructor_Enter);
             this.Load += new System.EventHandler(this.Constructor_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

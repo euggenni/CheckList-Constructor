@@ -11,31 +11,40 @@ namespace CheckList_Konstruktor
         //секция полей титульного листа
         private string name; //название карточки задания
         private string course; //предмет, для которого создана карточка задания
-        private int classNum; //номер занятия
-        private string purpose; //цель занятия
-        private int time; //время на занятие 
-        private string place; //место проведения занятия
-        private string material; //материальное обеспечение занятия
-        private string literature; //литература
-        private string decreace; //оценка снижается...
+        private int classNum = 0; //номер занятия
+        private string topic = ""; //тема занятия
+        private string purpose = ""; //цель занятия
+        private int time = 0; //время на занятие 
+        private string place = ""; //место проведения занятия
+        private string material = ""; //материальное обеспечение занятия
+        private string literature = ""; //литература
+        private string comand = ""; //команда к началу действий
+        private string decreace = ""; //оценка снижается...
 
         //секция конструкторов
-        public Title()
+        public Title(string name, string course, int classNum, string topic, string purpose, int time, string place, string material, string literature, string comand, string decreace)
         {
-            this.name = "";
-            this.course = "";
-            this.classNum = 0;
-            this.purpose = "";
-            this.time = 0;
-            this.place = "";
-            this.material = "";
-            this.literature = "";
-            this.decreace = "";
+            this.Name = name;
+            this.Course = course;
+            this.ClassNum = classNum;
+            this.Topic = topic;
+            this.Purpose = purpose;
+            this.Time = time;
+            this.Place = place;
+            this.Material = material;
+            this.Literature = literature;
+            this.Comand = Comand;
+            this.Decreace = decreace;
         }
         public Title(string name, string course)
         {
-            this.name = name;
-            this.course = course;
+            this.Name = name;
+            this.Course = course;
+        }
+        public Title()
+        {
+            this.Name = "";
+            this.Course = "";
         }
         //секция свойств полей титульного листа
         public string Name
@@ -52,6 +61,11 @@ namespace CheckList_Konstruktor
         {
             get { return classNum; }
             set { classNum = value; }
+        }
+        public string Topic
+        {
+            get { return topic; }
+            set { topic = value; }
         }
         public string Purpose
         {
@@ -77,6 +91,11 @@ namespace CheckList_Konstruktor
         {
             get { return literature; }
             set { literature = value; }
+        }
+        public string Comand
+        {
+            get { return comand; }
+            set { comand = value; }
         }
         public string Decreace
         {

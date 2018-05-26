@@ -11,13 +11,22 @@ namespace CheckList_Konstruktor
     public class CheckList
     {
         //секция полей карточки задания
+        private int index;//принадлежность листа предмету
         private Title inform; //информация титульного листа
         private List<Task> tasks; //список всех тасков
         private Marks notes; //критерии оценки
         private bool hasTimer; //засечка времени выполнения 
 
 
+
         //секция конструкторов
+        public CheckList(Title Inform, List<Task> Tasks, Marks Notes, bool hasTimer)
+        {
+            this.Inform = Inform;
+            this.Tasks = Tasks;
+            this.Notes = Notes;
+            this.hasTimer = hasTimer;
+        }
         public CheckList(string Course, string Name, List<Task> Tasks, Marks Notes, bool hasTimer)
         {
             this.inform = new Title(Name, Course);
@@ -92,6 +101,17 @@ namespace CheckList_Konstruktor
         //особый гость
         public void ExportToWord()
         {
+            //тестовый блок
+            this.inform.ClassNum = 3;
+            this.inform.Comand = "к неполной разборке автомата приступить!";
+            this.inform.Decreace = "потеря автомата - ссылка в дизбад";
+            this.inform.Literature = "Учебник \"Военная топография\", стр 94-95";
+            this.inform.Material = "Топографические карты. Клей. Ножницы (нож). Карандаши. Офицерские линейки. Курвиметры. Клей.";
+            this.inform.Place = "класс";
+            this.inform.Purpose = "привить навык по разборке оружия";
+            this.inform.Time = 90;
+            //this.inform.Topic = "Сборка и разборка оружия";
+
             //открытие приложения Word
             var app = new Word.Application();
             app.Visible = false;
@@ -111,7 +131,7 @@ namespace CheckList_Konstruktor
             p1.Range.Font.Bold = 1;
             p1.Range.Font.Name = font;
             p1.Range.Font.Size = 14;
-            p1.Range.Text = this.inform.Course;
+            p1.Range.Text = "КАРТОЧКА ЗАДАНИЯ";
             p1.Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
             p1.Range.InsertParagraphAfter();
 
@@ -119,14 +139,14 @@ namespace CheckList_Konstruktor
             p2.Range.Font.Bold = 1;
             p2.Range.Font.Name = font;
             p2.Range.Font.Size = 14;
-            p2.Range.Text = "Занятие №" + this.inform.ClassNum;
+            p2.Range.Text = this.inform.Course;
             p2.Range.InsertParagraphAfter();
 
             Word.Paragraph p3 = doc.Content.Paragraphs.Add(ref missing);
             p3.Range.Font.Bold = 1;
             p3.Range.Font.Name = font;
             p3.Range.Font.Size = 14;
-            p3.Range.Text = "КАРТОЧКА ЗАДАНИЯ";
+            p3.Range.Text = "Занятие №" + this.inform.ClassNum;
             p3.Range.InsertParagraphAfter();
 
             Word.Paragraph p4 = doc.Content.Paragraphs.Add(ref missing);
@@ -153,7 +173,7 @@ namespace CheckList_Konstruktor
             p6.Range.Font.Bold = 1;
             p6.Range.Font.Name = font;
             p6.Range.Font.Size = 14;
-            p6.Range.Text = "Время: " + this.inform.Time;
+            p6.Range.Text = "Время: " + this.inform.Time + " мин.";
             oStart = p6.Range.Start + p6.Range.Text.IndexOf(':');
             oEnd = p6.Range.Start + p6.Range.Text.Length;
             p = doc.Range(ref oStart, ref oEnd);
@@ -197,7 +217,7 @@ namespace CheckList_Konstruktor
             p10.Range.Font.Bold = 1;
             p10.Range.Font.Name = font;
             p10.Range.Font.Size = 14;
-            p10.Range.Text = "\nКритерии оценки: Отлично - " + this.notes.Excellent + ", Хорошо - " + this.notes.Good + "; Удовлетворительно - " + this.notes.Satisfactory;
+            p10.Range.Text = "\nНачало по команде: \"" + this.inform.Comand + "\"";
             oStart = p10.Range.Start + p10.Range.Text.IndexOf(':');
             oEnd = p10.Range.Start + p10.Range.Text.Length;
             p = doc.Range(ref oStart, ref oEnd);
@@ -208,15 +228,26 @@ namespace CheckList_Konstruktor
             p11.Range.Font.Bold = 1;
             p11.Range.Font.Name = font;
             p11.Range.Font.Size = 14;
-            p11.Range.Text = "Оценка снижается: " + this.inform.Decreace;
+            p11.Range.Text = "Критерии оценки: Отлично - " + this.notes.Excellent + " c, Хорошо - " + this.notes.Good + " c, Удовлетворительно - " + this.notes.Satisfactory + " с.";
             oStart = p11.Range.Start + p11.Range.Text.IndexOf(':');
             oEnd = p11.Range.Start + p11.Range.Text.Length;
             p = doc.Range(ref oStart, ref oEnd);
             p.Bold = 0;
             p11.Range.InsertParagraphAfter();
 
+            Word.Paragraph p12 = doc.Content.Paragraphs.Add(ref missing);
+            p12.Range.Font.Bold = 1;
+            p12.Range.Font.Name = font;
+            p12.Range.Font.Size = 14;
+            p12.Range.Text = "Оценка снижается: " + this.inform.Decreace;
+            oStart = p12.Range.Start + p12.Range.Text.IndexOf(':');
+            oEnd = p12.Range.Start + p12.Range.Text.Length;
+            p = doc.Range(ref oStart, ref oEnd);
+            p.Bold = 0;
+            p12.Range.InsertParagraphAfter();
+
             //Создание таблицы
-            var table = doc.Tables.Add(p11.Range, this.Tasks.Count + 2, 5, ref missing, ref missing);
+            var table = doc.Tables.Add(p12.Range, this.Tasks.Count + 5, 5, ref missing, ref missing);
             table.Borders.Enable = 1;
             table.Columns[1].Width = 30;
             table.Columns[2].Width = 75;
@@ -291,13 +322,22 @@ namespace CheckList_Konstruktor
             }
 
             //Вставка поля с оценкой
-            Word.Cell fcell = table.Cell(table.Rows.Count, 1);
-            fcell.Merge(table.Cell(table.Rows.Count, 4));
-            fcell.Range.Font.Name = font;
-            fcell.Range.Text = "Оценка: ";
-            fcell.Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphRight;
-            fcell.Range.Font.Size = 14;
-            fcell.Range.Font.Bold = 1;
+            for (int i = 0; i < 4; i++)
+            {
+                Word.Cell fcell = table.Cell(table.Rows.Count - i, 1);
+                fcell.Merge(table.Cell(table.Rows.Count - i, 4));
+                fcell.Range.Font.Name = font;
+                switch (i)
+                {
+                    case 0: fcell.Range.Text = "Итоговая оценка: "; break;
+                    case 1: fcell.Range.Text = "Оценка снижена на количество баллов: "; break;
+                    case 2: fcell.Range.Text = "Время выполнения: "; break;
+                    case 3: fcell.Range.Text = "Процент выполнения: "; break;
+                }
+                fcell.Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphRight;
+                fcell.Range.Font.Size = 14;
+                fcell.Range.Font.Bold = 1;
+            }
 
             //Сохранение файла
             doc.SaveAs2(Application.StartupPath + @"\" + this.inform.Name + ".docx");

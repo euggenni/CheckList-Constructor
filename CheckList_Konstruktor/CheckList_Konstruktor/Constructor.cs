@@ -14,20 +14,50 @@ namespace CheckList_Konstruktor
 {
     public partial class Constructor : Form
     {
-        CheckList Checks;
         int n = 1; //нумератор строк таблицы
-        public Constructor(CheckList Checks)
+        public Constructor()
         {
             InitializeComponent();
-            this.Checks = Checks;
         }
 
         private void Constructor_Load(object sender, EventArgs e)
         {
-            label5.Text = Checks.Inform.Name;
-            /*CheckList Checker = new CheckList("Гкчп", "Ектенчукс", new List<Task>(), new Marks(1, 2, 3));
-            Checker.AddTask(new Task("Велосипед","Краксеньпукс", null));
-            Checker.AddTask(new Task("Анчоус", "Семен бородач", null));*/
+            if (DataChekList.Check == null)
+            {
+                label5.Visible = false;
+                tableLayoutPanel1.Visible = false;
+                button1.Visible = false;
+            }
+            else
+            {
+                label5.Visible = true;
+                /////// временное название предмета, потом будет браться из сохраненных предметов по номеру
+                label5.Text = DataChekList.Check.Inform.ClassNum.ToString();
+                tableLayoutPanel1.Visible = true;
+                button1.Visible = true;
+            }
+            if (DataChekList.Cource == null)
+            {
+                DataChekList.Cource = Subjects.LoadSubList();
+            }
+        }
+
+        private void Constructor_Enter(object sender, EventArgs e)
+        {
+            if (DataChekList.Check == null)
+            {
+                label5.Visible = false;
+                tableLayoutPanel1.Visible = false;
+                button1.Visible = false;
+            }
+            else
+            {
+                label5.Visible = true;
+                /////// временное название предмета, потом будет браться из сохраненных предметов по номеру
+                label5.Text = DataChekList.Check.Inform.ClassNum.ToString();
+                tableLayoutPanel1.Visible = true;
+                button1.Visible = true;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -82,28 +112,22 @@ namespace CheckList_Konstruktor
 
         private void AddPictureClicked(object sender, EventArgs e)
         {
-            openFileDialog1.Title = "Выберите изображение";
-            openFileDialog1.Filter = "Изображения (*.jpg)|*.jpg";
-            if (openFileDialog1.ShowDialog() != DialogResult.OK) return;
-            Button b = (Button)sender;
-            b.Text = "";
-            b.BackgroundImage = new Bitmap(openFileDialog1.FileName);
-            b.BackgroundImageLayout = ImageLayout.Zoom;
+
         }
 
         private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e) //сохранение
         {
             ReadToCheckList();
-            String Data = JsonConvert.SerializeObject(Checks);
+            String Data = JsonConvert.SerializeObject(DataChekList.Check);
             try
             {
-                File.WriteAllText("CheckList\\" + Checks.Inform.Course + " " + Checks.Inform.Name + ".test", Data);
+                File.WriteAllText("CheckList\\" + DataChekList.Check.Inform.Course + " " + DataChekList.Check.Inform.Name + ".test", Data);
             }
             catch (Exception)
             {
                 MessageBox.Show("Ошибка сохранения чек листа.");
             }
-            Checks.Tasks.Clear();
+            DataChekList.Check.Tasks.Clear();
         }
 
         private void ReadToCheckList() //собирает информацию из Control таблицы в чек лист
@@ -138,7 +162,7 @@ namespace CheckList_Konstruktor
                                 {
                                     task.Image = null;
                                 }
-                                Checks.Tasks.Add(task);
+                                DataChekList.Check.Tasks.Add(task);
                                 task = new Task();
                             } break;
                         }
@@ -150,7 +174,7 @@ namespace CheckList_Konstruktor
         private string ImageToString(Image Pic, int Number) //сохраняет картинку в папке Picture, возвращает ее имя
         {
             string Name = "";
-            Name = Checks.Inform.Course + " " + Checks.Inform.Name + Number.ToString() + ".bmp";
+            Name = DataChekList.Check.Inform.Course + " " + DataChekList.Check.Inform.Name + Number.ToString() + ".bmp";
             try
             {
                 Pic.Save("CheckList\\Pictures\\" + Name, System.Drawing.Imaging.ImageFormat.Bmp);
@@ -166,8 +190,8 @@ namespace CheckList_Konstruktor
         private void экспортВWordToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ReadToCheckList();
-            Checks.ExportToWord();
-            Checks.Tasks.Clear();
+            DataChekList.Check.ExportToWord();
+            DataChekList.Check.Tasks.Clear();
         }
 
         private void добавитьудалитьПолеToolStripMenuItem_Click(object sender, EventArgs e)
@@ -178,7 +202,14 @@ namespace CheckList_Konstruktor
 
         private void добавитьКарточкЗаданияToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Form1 Form = new Form1();
+            Form.ShowDialog();
+        }
 
+        private void редактироватьПредметыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddCources Cources = new AddCources();
+            Cources.ShowDialog();
         }
     }
 }

@@ -24,3 +24,4 @@ C:\Users\1\Documents\GitHub\CheckList-Constructor\CheckList_Konstruktor\CheckLis
 C:\Users\1\Documents\GitHub\CheckList-Constructor\CheckList_Konstruktor\CheckList_Konstruktor\obj\Debug\CheckList_Konstruktor.Properties.Resources.resources
 C:\Users\1\Documents\GitHub\CheckList-Constructor\CheckList_Konstruktor\CheckList_Konstruktor\obj\Debug\CheckList_Konstruktor.csproj.GenerateResource.Cache
 C:\Users\1\Documents\GitHub\CheckList-Constructor\CheckList_Konstruktor\CheckList_Konstruktor\obj\Debug\CheckList_Konstruktor.AddPlatoons.resources
+C:\Users\1\Documents\GitHub\CheckList-Constructor\CheckList_Konstruktor\CheckList_Konstruktor\obj\Debug\CheckList_Konstruktor.AddCources.resources

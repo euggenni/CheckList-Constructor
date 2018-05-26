@@ -44,6 +44,10 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.richTextBox4 = new System.Windows.Forms.RichTextBox();
+            this.richTextBox3 = new System.Windows.Forms.RichTextBox();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
@@ -55,13 +59,11 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox3 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox4 = new System.Windows.Forms.RichTextBox();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.label16 = new System.Windows.Forms.Label();
             this.richTextBox5 = new System.Windows.Forms.RichTextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.richTextBox6 = new System.Windows.Forms.RichTextBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -216,6 +218,7 @@
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.label17);
             this.panel3.Controls.Add(this.richTextBox4);
             this.panel3.Controls.Add(this.richTextBox3);
             this.panel3.Controls.Add(this.richTextBox2);
@@ -225,7 +228,6 @@
             this.panel3.Controls.Add(this.textBox6);
             this.panel3.Controls.Add(this.label15);
             this.panel3.Controls.Add(this.label14);
-            this.panel3.Controls.Add(this.label13);
             this.panel3.Controls.Add(this.label12);
             this.panel3.Controls.Add(this.label11);
             this.panel3.Controls.Add(this.label10);
@@ -234,6 +236,38 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(481, 505);
             this.panel3.TabIndex = 7;
+            // 
+            // richTextBox4
+            // 
+            this.richTextBox4.Location = new System.Drawing.Point(206, 394);
+            this.richTextBox4.Name = "richTextBox4";
+            this.richTextBox4.Size = new System.Drawing.Size(260, 96);
+            this.richTextBox4.TabIndex = 13;
+            this.richTextBox4.Text = "";
+            // 
+            // richTextBox3
+            // 
+            this.richTextBox3.Location = new System.Drawing.Point(206, 289);
+            this.richTextBox3.Name = "richTextBox3";
+            this.richTextBox3.Size = new System.Drawing.Size(260, 96);
+            this.richTextBox3.TabIndex = 12;
+            this.richTextBox3.Text = "";
+            // 
+            // richTextBox2
+            // 
+            this.richTextBox2.Location = new System.Drawing.Point(206, 187);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(260, 96);
+            this.richTextBox2.TabIndex = 11;
+            this.richTextBox2.Text = "";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(206, 83);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(260, 96);
+            this.richTextBox1.TabIndex = 10;
+            this.richTextBox1.Text = "";
             // 
             // textBox8
             // 
@@ -270,7 +304,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label14.Location = new System.Drawing.Point(4, 187);
+            this.label14.Location = new System.Drawing.Point(3, 289);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(87, 17);
             this.label14.TabIndex = 5;
@@ -279,9 +313,9 @@
             // label13
             // 
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label13.Location = new System.Drawing.Point(3, 83);
+            this.label13.Location = new System.Drawing.Point(5, 107);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(193, 38);
+            this.label13.Size = new System.Drawing.Size(138, 64);
             this.label13.TabIndex = 4;
             this.label13.Text = "Материальное обеспечение занятия";
             // 
@@ -309,7 +343,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label10.Location = new System.Drawing.Point(4, 286);
+            this.label10.Location = new System.Drawing.Point(4, 187);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(100, 17);
             this.label10.TabIndex = 1;
@@ -335,47 +369,25 @@
             this.label8.TabIndex = 8;
             this.label8.Text = "Введите поля заголовка:";
             // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(206, 84);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(260, 96);
-            this.richTextBox1.TabIndex = 10;
-            this.richTextBox1.Text = "";
-            // 
-            // richTextBox2
-            // 
-            this.richTextBox2.Location = new System.Drawing.Point(206, 187);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(260, 96);
-            this.richTextBox2.TabIndex = 11;
-            this.richTextBox2.Text = "";
-            // 
-            // richTextBox3
-            // 
-            this.richTextBox3.Location = new System.Drawing.Point(206, 289);
-            this.richTextBox3.Name = "richTextBox3";
-            this.richTextBox3.Size = new System.Drawing.Size(260, 96);
-            this.richTextBox3.TabIndex = 12;
-            this.richTextBox3.Text = "";
-            // 
-            // richTextBox4
-            // 
-            this.richTextBox4.Location = new System.Drawing.Point(206, 394);
-            this.richTextBox4.Name = "richTextBox4";
-            this.richTextBox4.Size = new System.Drawing.Size(260, 96);
-            this.richTextBox4.TabIndex = 13;
-            this.richTextBox4.Text = "";
-            // 
             // panel4
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.richTextBox6);
             this.panel4.Controls.Add(this.richTextBox5);
             this.panel4.Controls.Add(this.label16);
-            this.panel4.Location = new System.Drawing.Point(19, 475);
+            this.panel4.Controls.Add(this.label13);
+            this.panel4.Location = new System.Drawing.Point(19, 329);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(312, 72);
+            this.panel4.Size = new System.Drawing.Size(312, 218);
             this.panel4.TabIndex = 9;
+            // 
+            // richTextBox5
+            // 
+            this.richTextBox5.Location = new System.Drawing.Point(149, 11);
+            this.richTextBox5.Name = "richTextBox5";
+            this.richTextBox5.Size = new System.Drawing.Size(144, 87);
+            this.richTextBox5.TabIndex = 1;
+            this.richTextBox5.Text = "";
             // 
             // label16
             // 
@@ -387,13 +399,23 @@
             this.label16.TabIndex = 0;
             this.label16.Text = "Начало по команде";
             // 
-            // richTextBox5
+            // richTextBox6
             // 
-            this.richTextBox5.Location = new System.Drawing.Point(149, 11);
-            this.richTextBox5.Name = "richTextBox5";
-            this.richTextBox5.Size = new System.Drawing.Size(144, 46);
-            this.richTextBox5.TabIndex = 1;
-            this.richTextBox5.Text = "";
+            this.richTextBox6.Location = new System.Drawing.Point(149, 107);
+            this.richTextBox6.Name = "richTextBox6";
+            this.richTextBox6.Size = new System.Drawing.Size(144, 96);
+            this.richTextBox6.TabIndex = 5;
+            this.richTextBox6.Text = "";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label17.Location = new System.Drawing.Point(3, 83);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(100, 17);
+            this.label17.TabIndex = 14;
+            this.label17.Text = "Тема занятия";
             // 
             // Form1
             // 
@@ -460,6 +482,8 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.RichTextBox richTextBox5;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.RichTextBox richTextBox6;
     }
 }
 
