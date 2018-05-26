@@ -40,6 +40,10 @@ namespace CheckList_Konstruktor
             {
                 DataChekList.Cource = Subjects.LoadSubList();
             }
+            if (DataChekList.Platoons == null)
+            {
+                DataChekList.Platoons = Platoons.LoadPlatList("Platoons");
+            }
         }
 
         private void Constructor_Enter(object sender, EventArgs e)
@@ -210,6 +214,12 @@ namespace CheckList_Konstruktor
         {
             AddCources Cources = new AddCources();
             Cources.ShowDialog();
+        }
+
+        private void редактироватьВзводаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AddPlatoons Platoon = new AddPlatoons();
+            Platoon.ShowDialog();
         }
     }
 }

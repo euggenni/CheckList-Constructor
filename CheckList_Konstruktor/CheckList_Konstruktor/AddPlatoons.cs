@@ -16,5 +16,15 @@ namespace CheckList_Konstruktor
         {
             InitializeComponent();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void AddPlatoons_Load(object sender, EventArgs e)
+        {
+            bindingSource1.DataSource = DataChekList.Platoons;
+        }
     }
 }
