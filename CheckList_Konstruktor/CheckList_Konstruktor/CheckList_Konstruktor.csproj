@@ -54,6 +54,12 @@
     <Compile Include="AddCources.Designer.cs">
       <DependentUpon>AddCources.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddPlatoon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddPlatoon.Designer.cs">
+      <DependentUpon>AddPlatoon.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddPlatoons.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,6 +99,9 @@
     <Compile Include="Title.cs" />
     <EmbeddedResource Include="AddCources.resx">
       <DependentUpon>AddCources.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddPlatoon.resx">
+      <DependentUpon>AddPlatoon.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddPlatoons.resx">
       <DependentUpon>AddPlatoons.cs</DependentUpon>

@@ -25,7 +25,6 @@ namespace CheckList_Konstruktor
         private void button1_Click(object sender, EventArgs e)
         {
             DataChekList.Cource.SaveSubList();
-            this.Close();
         }
 
         private void AddCources_Load(object sender, EventArgs e)

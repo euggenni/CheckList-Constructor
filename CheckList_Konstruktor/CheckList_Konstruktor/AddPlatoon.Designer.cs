@@ -1,6 +1,6 @@
 ﻿namespace CheckList_Konstruktor
 {
-    partial class AddPlatoons
+    partial class AddPlatoon
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddPlatoons));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddPlatoon));
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
@@ -43,10 +43,8 @@
             this.bindingNavigatorAddNewItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorDeleteItem = new System.Windows.Forms.ToolStripButton();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).BeginInit();
             this.bindingNavigator1.SuspendLayout();
@@ -71,8 +69,7 @@
             this.bindingNavigatorMoveLastItem,
             this.bindingNavigatorSeparator2,
             this.bindingNavigatorAddNewItem,
-            this.bindingNavigatorDeleteItem,
-            this.toolStripComboBox1});
+            this.bindingNavigatorDeleteItem});
             this.bindingNavigator1.Location = new System.Drawing.Point(0, 0);
             this.bindingNavigator1.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.bindingNavigator1.MoveLastItem = this.bindingNavigatorMoveLastItem;
@@ -80,7 +77,7 @@
             this.bindingNavigator1.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.bindingNavigator1.Name = "bindingNavigator1";
             this.bindingNavigator1.PositionItem = this.bindingNavigatorPositionItem;
-            this.bindingNavigator1.Size = new System.Drawing.Size(445, 25);
+            this.bindingNavigator1.Size = new System.Drawing.Size(378, 25);
             this.bindingNavigator1.TabIndex = 0;
             this.bindingNavigator1.Text = "bindingNavigator1";
             // 
@@ -176,22 +173,15 @@
             this.dataGridView1.DataSource = this.bindingSource1;
             this.dataGridView1.Location = new System.Drawing.Point(12, 28);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(421, 224);
+            this.dataGridView1.Size = new System.Drawing.Size(354, 192);
             this.dataGridView1.TabIndex = 1;
-            // 
-            // toolStripComboBox1
-            // 
-            this.toolStripComboBox1.Name = "toolStripComboBox1";
-            this.toolStripComboBox1.Size = new System.Drawing.Size(121, 25);
-            this.toolStripComboBox1.ToolTipText = "Выбрать взвод";
-            this.toolStripComboBox1.SelectedIndexChanged += new System.EventHandler(this.toolStripComboBox1_SelectedIndexChanged);
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(62, 258);
+            this.button1.Location = new System.Drawing.Point(91, 226);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(88, 27);
+            this.button1.Size = new System.Drawing.Size(94, 30);
             this.button1.TabIndex = 2;
             this.button1.Text = "Сохранить";
             this.button1.UseVisualStyleBackColor = true;
@@ -200,39 +190,27 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.Location = new System.Drawing.Point(156, 258);
+            this.button2.Location = new System.Drawing.Point(191, 226);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(137, 27);
+            this.button2.Size = new System.Drawing.Size(88, 30);
             this.button2.TabIndex = 3;
-            this.button2.Text = "Изменить взвода";
+            this.button2.Text = "Отмена";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button3
-            // 
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button3.Location = new System.Drawing.Point(299, 258);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 27);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "Отмена";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // AddPlatoons
+            // AddPlatoon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(445, 294);
-            this.Controls.Add(this.button3);
+            this.ClientSize = new System.Drawing.Size(378, 261);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.bindingNavigator1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "AddPlatoons";
-            this.Text = "Редактирование состава взводов";
-            this.Load += new System.EventHandler(this.AddPlatoons_Load);
+            this.Name = "AddPlatoon";
+            this.Text = "Редактирование взводов";
+            this.Load += new System.EventHandler(this.AddPlatoon_Load);
             ((System.ComponentModel.ISupportInitialize)(this.bindingNavigator1)).EndInit();
             this.bindingNavigator1.ResumeLayout(false);
             this.bindingNavigator1.PerformLayout();
@@ -257,12 +235,9 @@
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveNextItem;
         private System.Windows.Forms.ToolStripButton bindingNavigatorMoveLastItem;
         private System.Windows.Forms.ToolStripSeparator bindingNavigatorSeparator2;
-        private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.BindingSource bindingSource1;
+        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-
     }
 }

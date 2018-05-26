@@ -73,7 +73,7 @@ namespace CheckList_Konstruktor
             try
             {
                 data = File.ReadAllText(Application.StartupPath + @"\" + fname + ".plat");
-                data = Sini4ka.Landing(data, "синяя синичка");
+                //data = Sini4ka.Landing(data, "синяя синичка");
                 return JsonConvert.DeserializeObject<Platoons>(data);
             }
             catch (Exception e)
