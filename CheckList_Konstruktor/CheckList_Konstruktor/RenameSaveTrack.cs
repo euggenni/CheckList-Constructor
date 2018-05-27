@@ -35,7 +35,7 @@ namespace CheckList_Konstruktor
         private void button2_Click(object sender, EventArgs e)
         {
             DataChekList.SaveTrack = textBox1.Text;
-            DataChekList.SaveSaveTrack();
+            DataChekList.SaveSaveTrack(DataChekList.Encrypt);
         }
 
         private void button3_Click(object sender, EventArgs e)

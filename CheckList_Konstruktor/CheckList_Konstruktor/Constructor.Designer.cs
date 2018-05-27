@@ -269,6 +269,7 @@
             this.шифроватьToolStripMenuItem.Name = "шифроватьToolStripMenuItem";
             this.шифроватьToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.шифроватьToolStripMenuItem.Text = "Шифровать";
+            this.шифроватьToolStripMenuItem.Click += new System.EventHandler(this.шифроватьToolStripMenuItem_Click);
             // 
             // Constructor
             // 
@@ -284,6 +285,7 @@
             this.Name = "Constructor";
             this.Text = "Конструктор";
             this.Activated += new System.EventHandler(this.Constructor_Enter);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Constructor_FormClosed);
             this.Load += new System.EventHandler(this.Constructor_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

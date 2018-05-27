@@ -56,7 +56,7 @@ namespace CheckList_Konstruktor
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DataChekList.Platoons.SavePlatList();
+            DataChekList.Platoons.SavePlatList(DataChekList.Encrypt);
         }
 
         private void toolStripComboBox1_SelectedIndexChanged(object sender, EventArgs e)

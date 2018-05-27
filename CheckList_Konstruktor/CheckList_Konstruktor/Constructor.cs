@@ -35,18 +35,20 @@ namespace CheckList_Konstruktor
                 tableLayoutPanel1.Visible = true;
                 button1.Visible = true;
             }
+            DataChekList.LoadEncrypt();
+            шифроватьToolStripMenuItem.Checked = DataChekList.Encrypt;
             if (DataChekList.SaveTrack == "")
             {
-                DataChekList.LoadSaveTrack();
+                DataChekList.LoadSaveTrack(DataChekList.Encrypt);
             }
             CreateNewDirectory();
             if (DataChekList.Cource == null)
             {
-                DataChekList.Cource = Subjects.LoadSubList();
+                DataChekList.Cource = Subjects.LoadSubList(DataChekList.Encrypt);
             }
             if (DataChekList.Platoons == null)
             {
-                DataChekList.Platoons = Platoons.LoadPlatList();
+                DataChekList.Platoons = Platoons.LoadPlatList(DataChekList.Encrypt);
             }
         }
 
@@ -130,12 +132,11 @@ namespace CheckList_Konstruktor
 
         private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e) //сохранение
         {
-            bool encrypt = false; //шифровка
             if (DataChekList.Check != null)
             {
                 ReadToCheckList();
                 String Data = JsonConvert.SerializeObject(DataChekList.Check);
-                if (encrypt) Data = Sini4ka.Flying(Data, "синяя синичка");
+                if (DataChekList.Encrypt) Data = Sini4ka.Flying(Data, "синяя синичка");
                 try
                 {
                     File.WriteAllText(DataChekList.SaveTrack + @"\CheckList\" + DataChekList.Check.Inform.Course + " " + DataChekList.Check.Inform.Name + ".test", Data);
@@ -271,6 +272,17 @@ namespace CheckList_Konstruktor
                     dirinfo.CreateSubdirectory(@"Pictures");
                 }
             }
+        }
+
+        private void шифроватьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            шифроватьToolStripMenuItem.Checked = !шифроватьToolStripMenuItem.Checked;
+            DataChekList.Encrypt = шифроватьToolStripMenuItem.Checked;
+        }
+
+        private void Constructor_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            DataChekList.SaveEncrypt();
         }
     }
 }

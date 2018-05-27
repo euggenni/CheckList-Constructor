@@ -47,7 +47,7 @@ namespace CheckList_Konstruktor
             set { DataChekList.encrypt = value; }
         }
 
-        public static void LoadSaveTrack(bool encrypt)
+        public static void LoadSaveTrack(bool encrypt) //загружает путь сохранения
         {
             try
             {
@@ -60,7 +60,7 @@ namespace CheckList_Konstruktor
                 MessageBox.Show(e.Message);
             }
         }
-        public static void SaveSaveTrack(bool encrypt)
+        public static void SaveSaveTrack(bool encrypt) //сохраняет суть сохранения
         {
             if (encrypt) SaveTrack = Sini4ka.Flying(SaveTrack, "синяя синичка");
             try
@@ -74,9 +74,37 @@ namespace CheckList_Konstruktor
             if (encrypt) SaveTrack = Sini4ka.Landing(SaveTrack, "синяя синичка");
         }
 
-        public static void LoadEncrypt()
-        { 
-            
+        public static void LoadEncrypt() //загружает параметр шифровки
+        {
+            string En = "";
+            try
+            {
+                En = File.ReadAllText(Application.StartupPath + @"\Encr.ypt");
+                if (En == "True")
+                {
+                    Encrypt = true;
+                }
+                else
+                {
+                    Encrypt = false;
+                }
+            }
+            catch (Exception e)
+            {
+                Encrypt = false;
+                MessageBox.Show(e.Message);
+            }
+        }
+        public static void SaveEncrypt() //сохраняет параметр шифровки
+        {
+            try
+            {
+                File.WriteAllText(Application.StartupPath + @"\Encr.ypt", Encrypt.ToString());
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
     }
 }
