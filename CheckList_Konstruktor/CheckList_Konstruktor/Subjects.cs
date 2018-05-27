@@ -51,28 +51,26 @@ namespace CheckList_Konstruktor
             return this.subList.Count;
         }
 
-        public void SaveSubList()
+        public void SaveSubList(bool encrypt)
         {
-            string link = "";
             string data = JsonConvert.SerializeObject(this);
-            //тут шифровка
+            if (encrypt) data = Sini4ka.Flying(data, "синяя синичка");
             try
             {
-                File.WriteAllText(Application.StartupPath + @"\subjects.sub", data);
+                File.WriteAllText(@DataChekList.SaveTrack + /*Application.StartupPath +*/@"\CheckList\Inform\subjects.sub", data);
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
             }
         }
-        public static Subjects LoadSubList() //чтение предметов
+        public static Subjects LoadSubList(bool encrypt) //чтение предметов
         {
-            string link = "";
             String data = "";
-            //тут расшифровка
             try
             {
-                data = File.ReadAllText(Application.StartupPath + @"\subjects.sub");
+                data = File.ReadAllText(@DataChekList.SaveTrack + /*Application.StartupPath +*/@"\CheckList\Inform\subjects.sub");
+                if (encrypt) data = Sini4ka.Landing(data, "синяя синичка");
                 return JsonConvert.DeserializeObject<Subjects>(data);
             }
             catch (Exception e)

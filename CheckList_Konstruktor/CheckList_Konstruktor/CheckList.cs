@@ -20,6 +20,14 @@ namespace CheckList_Konstruktor
 
 
         //секция конструкторов
+        public CheckList(int Index, Title Inform, List<Task> Tasks, Marks Notes, bool hasTimer)
+        {
+            this.index = Index;
+            this.Inform = Inform;
+            this.Tasks = Tasks;
+            this.Notes = Notes;
+            this.hasTimer = hasTimer;
+        }
         public CheckList(Title Inform, List<Task> Tasks, Marks Notes, bool hasTimer)
         {
             this.Inform = Inform;
@@ -99,17 +107,17 @@ namespace CheckList_Konstruktor
         }
 
         //особый гость
-        public void ExportToWord()
+        public void ExportToWord(string SaveTrack)
         {
             //тестовый блок
-            this.inform.ClassNum = 3;
+            /*this.inform.ClassNum = 3;
             this.inform.Comand = "к неполной разборке автомата приступить!";
             this.inform.Decreace = "потеря автомата - ссылка в дизбад";
             this.inform.Literature = "Учебник \"Военная топография\", стр 94-95";
             this.inform.Material = "Топографические карты. Клей. Ножницы (нож). Карандаши. Офицерские линейки. Курвиметры. Клей.";
             this.inform.Place = "класс";
             this.inform.Purpose = "привить навык по разборке оружия";
-            this.inform.Time = 90;
+            this.inform.Time = 90;*/
             //this.inform.Topic = "Сборка и разборка оружия";
 
             //открытие приложения Word
@@ -340,7 +348,7 @@ namespace CheckList_Konstruktor
             }
 
             //Сохранение файла
-            doc.SaveAs2(Application.StartupPath + @"\" + this.inform.Name + ".docx");
+            doc.SaveAs2(SaveTrack+@"\"/*Application.StartupPath + @"\"*/ + this.Inform.Course +" "+ this.inform.Name + ".docx");
             doc.Close(ref missing, ref missing, ref missing);
             doc = null;
             app.Quit(ref missing, ref missing, ref missing);

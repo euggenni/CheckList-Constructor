@@ -31,18 +31,22 @@ namespace CheckList_Konstruktor
             else
             {
                 label5.Visible = true;
-                /////// временное название предмета, потом будет браться из сохраненных предметов по номеру
-                label5.Text = DataChekList.Check.Inform.ClassNum.ToString();
+                label5.Text = DataChekList.Check.Inform.Name;
                 tableLayoutPanel1.Visible = true;
                 button1.Visible = true;
             }
+            if (DataChekList.SaveTrack == "")
+            {
+                DataChekList.LoadSaveTrack();
+            }
+            CreateNewDirectory();
             if (DataChekList.Cource == null)
             {
                 DataChekList.Cource = Subjects.LoadSubList();
             }
             if (DataChekList.Platoons == null)
             {
-                DataChekList.Platoons = Platoons.LoadPlatList("Platoons");
+                DataChekList.Platoons = Platoons.LoadPlatList();
             }
         }
 
@@ -57,8 +61,7 @@ namespace CheckList_Konstruktor
             else
             {
                 label5.Visible = true;
-                /////// временное название предмета, потом будет браться из сохраненных предметов по номеру
-                label5.Text = DataChekList.Check.Inform.ClassNum.ToString();
+                label5.Text = DataChekList.Check.Inform.Name;
                 tableLayoutPanel1.Visible = true;
                 button1.Visible = true;
             }
@@ -116,22 +119,37 @@ namespace CheckList_Konstruktor
 
         private void AddPictureClicked(object sender, EventArgs e)
         {
-
+            openFileDialog1.Title = "Выберите изображение";
+            openFileDialog1.Filter = "Изображения (*.jpg)|*.jpg";
+            if (openFileDialog1.ShowDialog() != DialogResult.OK) return;
+            Button b = (Button)sender;
+            b.Text = "";
+            b.BackgroundImage = new Bitmap(openFileDialog1.FileName);
+            b.BackgroundImageLayout = ImageLayout.Zoom;
         }
 
         private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e) //сохранение
         {
-            ReadToCheckList();
-            String Data = JsonConvert.SerializeObject(DataChekList.Check);
-            try
+            bool encrypt = false; //шифровка
+            if (DataChekList.Check != null)
             {
-                File.WriteAllText("CheckList\\" + DataChekList.Check.Inform.Course + " " + DataChekList.Check.Inform.Name + ".test", Data);
+                ReadToCheckList();
+                String Data = JsonConvert.SerializeObject(DataChekList.Check);
+                if (encrypt) Data = Sini4ka.Flying(Data, "синяя синичка");
+                try
+                {
+                    File.WriteAllText(DataChekList.SaveTrack + @"\CheckList\" + DataChekList.Check.Inform.Course + " " + DataChekList.Check.Inform.Name + ".test", Data);
+                }
+                catch (Exception a)
+                {
+                    MessageBox.Show("Ошибка сохранения чек листа. " + a.Message);
+                }
+                DataChekList.Check.Tasks.Clear();
             }
-            catch (Exception)
+            else
             {
-                MessageBox.Show("Ошибка сохранения чек листа.");
+                MessageBox.Show("Карточка задания не создана!");
             }
-            DataChekList.Check.Tasks.Clear();
         }
 
         private void ReadToCheckList() //собирает информацию из Control таблицы в чек лист
@@ -160,7 +178,7 @@ namespace CheckList_Konstruktor
                                 Button Lab = control as Button;
                                 if (Lab.BackgroundImage != null)
                                 {
-                                    task.Image = ImageToString(Lab.BackgroundImage, tableLayoutPanel1.GetRow(control));/*Lab.BackgroundImage as String;*/
+                                    task.Image = ImageToString(Lab.BackgroundImage, tableLayoutPanel1.GetRow(control));
                                 }
                                 else
                                 {
@@ -175,17 +193,17 @@ namespace CheckList_Konstruktor
             }
         }
 
-        private string ImageToString(Image Pic, int Number) //сохраняет картинку в папке Picture, возвращает ее имя
+        private string ImageToString(Image Pic, int Number) //сохраняет картинку в папке Pictures, возвращает ее имя
         {
             string Name = "";
             Name = DataChekList.Check.Inform.Course + " " + DataChekList.Check.Inform.Name + Number.ToString() + ".bmp";
             try
             {
-                Pic.Save("CheckList\\Pictures\\" + Name, System.Drawing.Imaging.ImageFormat.Bmp);
+                Pic.Save(DataChekList.SaveTrack + @"\CheckList\Pictures\" + Name, System.Drawing.Imaging.ImageFormat.Bmp);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                MessageBox.Show("Ошибка сохранения изображения.");
+                MessageBox.Show("Ошибка сохранения изображения. " + e.Message);
                 Name = null;
             }
             return Name;
@@ -193,9 +211,20 @@ namespace CheckList_Konstruktor
 
         private void экспортВWordToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ReadToCheckList();
-            DataChekList.Check.ExportToWord();
-            DataChekList.Check.Tasks.Clear();
+            if (DataChekList.Check != null)
+            {
+                FolderBrowserDialog Save = new FolderBrowserDialog();
+                if (Save.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    ReadToCheckList();
+                    DataChekList.Check.ExportToWord(Save.SelectedPath);
+                    DataChekList.Check.Tasks.Clear();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Карточка задания не создана!");
+            }
         }
 
         private void добавитьудалитьПолеToolStripMenuItem_Click(object sender, EventArgs e)
@@ -220,6 +249,28 @@ namespace CheckList_Konstruktor
         {
             AddPlatoons Platoon = new AddPlatoons();
             Platoon.ShowDialog();
+        }
+
+        private void изменитьПутьСохраненияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RenameSaveTrack Save = new RenameSaveTrack();
+            Save.ShowDialog();
+            CreateNewDirectory();
+        }
+
+        private void CreateNewDirectory() //проверяет нахождение папки с чек листами, если нет, то создает их
+        {
+            bool create = true; //на случай, если потребуется отключить сохранение извне
+            if (create)
+            {
+                DirectoryInfo dirinfo = new DirectoryInfo(DataChekList.SaveTrack + @"\CheckList");
+                if (!dirinfo.Exists)
+                {
+                    dirinfo.Create();
+                    dirinfo.CreateSubdirectory(@"Inform");
+                    dirinfo.CreateSubdirectory(@"Pictures");
+                }
+            }
         }
     }
 }

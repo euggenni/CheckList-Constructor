@@ -30,7 +30,7 @@ namespace CheckList_Konstruktor
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DataChekList.Platoons.SavePlatList("Platoons", false);
+            DataChekList.Platoons.SavePlatList();
         }
 
         private void button2_Click(object sender, EventArgs e)

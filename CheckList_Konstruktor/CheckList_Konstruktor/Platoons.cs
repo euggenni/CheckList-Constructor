@@ -52,28 +52,26 @@ namespace CheckList_Konstruktor
             return this.platList.Count;
         }
 
-        public void SavePlatList(string fname, bool encrypt)
+        public void SavePlatList(bool encrypt)
         {
             string data = JsonConvert.SerializeObject(this);
-            if (encrypt)
-                data = Sini4ka.Flying(data, "синяя синичка");
-            //тут шифровка
+            if (encrypt) data = Sini4ka.Flying(data, "синяя синичка");
             try
             {
-                File.WriteAllText(Application.StartupPath + @"\" + fname + ".plat", data);
+                File.WriteAllText(DataChekList.SaveTrack + /*Application.StartupPath +*/@"\CheckList\Inform\Platoons.plat", data);
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
             }
         }
-        public static Platoons LoadPlatList(string fname) //чтение предметов
+        public static Platoons LoadPlatList(bool encrypt) //чтение предметов
         {
             String data = "";
             try
             {
-                data = File.ReadAllText(Application.StartupPath + @"\" + fname + ".plat");
-                //data = Sini4ka.Landing(data, "синяя синичка");
+                data = File.ReadAllText(DataChekList.SaveTrack + /*Application.StartupPath +*/@"\CheckList\Inform\Platoons.plat");
+                if (encrypt) data = Sini4ka.Landing(data, "синяя синичка");
                 return JsonConvert.DeserializeObject<Platoons>(data);
             }
             catch (Exception e)
