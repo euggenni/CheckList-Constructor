@@ -198,10 +198,24 @@ namespace CheckList_Konstruktor
         private string ImageToString(Image Pic, int Number) //сохраняет картинку в папке Pictures, возвращает ее имя
         {
             string Name = "";
-            Name = DataChekList.Check.Inform.Course + " " + DataChekList.Check.Inform.Name + Number.ToString() + ".bmp";
+            int MaxSize = 300;
+            Name = DataChekList.Check.Inform.Course + " " + DataChekList.Check.Inform.Name + Number.ToString() + ".bin";
             try
             {
-                Pic.Save(DataChekList.SaveTrack + @"\CheckList\Pictures\" + Name, System.Drawing.Imaging.ImageFormat.Bmp);
+                float piece = 1;
+                if (Pic.Width > MaxSize || Pic.Height > MaxSize)
+                {
+                    if (Pic.Width >= Pic.Height)
+                    {
+                        piece = (float)MaxSize/Pic.Width;
+                    }
+                    else
+                    {
+                        piece = (float)MaxSize/Pic.Height;
+                    }
+                }
+                Pic = new Bitmap(Pic, (int)(Pic.Width * piece), (int)(Pic.Height * piece));
+                Pic.Save(DataChekList.SaveTrack + @"\CheckList\Pictures\" + Name, System.Drawing.Imaging.ImageFormat.Jpeg);
             }
             catch (Exception e)
             {

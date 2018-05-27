@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 using Word = Microsoft.Office.Interop.Word;
 
 namespace CheckList_Konstruktor
@@ -313,7 +314,9 @@ namespace CheckList_Konstruktor
                             {
                                 if (this.Tasks[i].Image != null)
                                 {
-                                    cell.Range.InlineShapes.AddPicture(SaveTrack+@"\"+/*Application.StartupPath +*/@"\CheckList\Pictures\" + this.Tasks[i].Image);
+                                    Rename(DataChekList.SaveTrack + @"\" +/*Application.StartupPath +*/@"\CheckList\Pictures\" + this.Tasks[i].Image, true);
+                                    cell.Range.InlineShapes.AddPicture(DataChekList.SaveTrack + @"\" +/*Application.StartupPath +*/@"\CheckList\Pictures\" + string.Concat(this.Tasks[i].Image.Remove(this.Tasks[i].Image.LastIndexOf('.')), ".jpeg"));
+                                    Rename(DataChekList.SaveTrack + @"\" +/*Application.StartupPath +*/@"\CheckList\Pictures\" + string.Concat(this.Tasks[i].Image.Remove(this.Tasks[i].Image.LastIndexOf('.')), ".jpeg"), false);
                                     cell.Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
                                 }
                             }
@@ -354,6 +357,26 @@ namespace CheckList_Konstruktor
             doc = null;
             app.Quit(ref missing, ref missing, ref missing);
             app = null;
+        }
+        private void Rename(string FileName, bool avers) //меняет тип файла из bin в jpeg и обратно
+        {
+            try
+            {
+                string newType = string.Copy(FileName);
+                if (avers) //в jpeg
+                {
+                    newType = string.Concat(newType.Remove(newType.LastIndexOf('.')), ".jpeg");
+                }
+                else //в bin
+                {
+                    newType = string.Concat(newType.Remove(newType.LastIndexOf('.')), ".bin");
+                }
+                File.Move(FileName, newType);
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
     }
 }
