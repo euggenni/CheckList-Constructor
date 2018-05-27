@@ -59,6 +59,7 @@ namespace CheckList_Konstruktor
         }
         public CheckList()
         {
+            this.index = 0;
             this.inform = new Title("Unknown", "Unknown");
             this.Tasks = new List<Task>();
             this.Notes = new Marks();
@@ -312,7 +313,7 @@ namespace CheckList_Konstruktor
                             {
                                 if (this.Tasks[i].Image != null)
                                 {
-                                    cell.Range.InlineShapes.AddPicture(Application.StartupPath + @"\CheckList\Pictures\" + this.Tasks[i].Image);
+                                    cell.Range.InlineShapes.AddPicture(SaveTrack+@"\"+/*Application.StartupPath +*/@"\CheckList\Pictures\" + this.Tasks[i].Image);
                                     cell.Range.ParagraphFormat.Alignment = Word.WdParagraphAlignment.wdAlignParagraphCenter;
                                 }
                             }

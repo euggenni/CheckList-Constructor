@@ -31,8 +31,15 @@ namespace CheckList_Konstruktor
                 time = Convert.ToInt32(textBox7.Text);
             }
             catch (Exception){}
-            Title title = new Title(textBox2.Text, comboBox1.SelectedText, classNum, richTextBox1.Text, richTextBox2.Text, time, textBox8.Text, richTextBox6.Text, richTextBox3.Text, richTextBox5.Text, richTextBox4.Text);
-            DataChekList.Check = new CheckList(comboBox1.SelectedIndex, title, new List<Task>(), new Marks(textBox3.Text, textBox4.Text, textBox5.Text), checkBox1.Checked);
+            try
+            {
+                Title title = new Title(textBox2.Text, comboBox1.SelectedItem.ToString(), classNum, richTextBox1.Text, richTextBox2.Text, time, textBox8.Text, richTextBox6.Text, richTextBox3.Text, richTextBox5.Text, richTextBox4.Text);
+                DataChekList.Check = new CheckList(comboBox1.SelectedIndex, title, new List<Task>(), new Marks(textBox3.Text, textBox4.Text, textBox5.Text), checkBox1.Checked);
+            }
+            catch (Exception)
+            {
+                DataChekList.Check = new CheckList();
+            }
             this.Close();
         }
 

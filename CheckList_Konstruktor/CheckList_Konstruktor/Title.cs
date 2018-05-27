@@ -33,7 +33,7 @@ namespace CheckList_Konstruktor
             this.Place = place;
             this.Material = material;
             this.Literature = literature;
-            this.Comand = Comand;
+            this.Comand = comand;
             this.Decreace = decreace;
         }
         public Title(string name, string course)

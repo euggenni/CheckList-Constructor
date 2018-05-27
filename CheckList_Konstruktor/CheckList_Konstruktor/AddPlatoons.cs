@@ -34,7 +34,7 @@ namespace CheckList_Konstruktor
             column.DataPropertyName = "Fio";
             column.HeaderText = "Студент";
             column.Name = "Студент";
-            column.Width = 320;
+            column.Width = 375;
             dataGridView1.Columns.Add(column);
         }
 

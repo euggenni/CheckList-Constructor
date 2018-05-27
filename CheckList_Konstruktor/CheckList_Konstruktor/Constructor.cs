@@ -66,6 +66,7 @@ namespace CheckList_Konstruktor
                 label5.Text = DataChekList.Check.Inform.Name;
                 tableLayoutPanel1.Visible = true;
                 button1.Visible = true;
+                label5.Left = (this.Width - label5.Width)/2;
             }
         }
 
@@ -283,6 +284,12 @@ namespace CheckList_Konstruktor
         private void Constructor_FormClosed(object sender, FormClosedEventArgs e)
         {
             DataChekList.SaveEncrypt();
+        }
+
+        private void помощьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Help help = new Help();
+            help.ShowDialog();
         }
     }
 }

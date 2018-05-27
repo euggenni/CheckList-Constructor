@@ -96,6 +96,7 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "RenameSaveTrack";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Редактирование пути сохранения";
             this.Load += new System.EventHandler(this.RenameSaveTrack_Load);
             this.ResumeLayout(false);

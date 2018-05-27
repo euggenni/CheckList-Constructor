@@ -209,6 +209,7 @@
             this.Controls.Add(this.button1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "AddCources";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Редактирование предметов";
             this.Load += new System.EventHandler(this.AddCources_Load);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();

@@ -24,7 +24,7 @@ namespace CheckList_Konstruktor
             column.DataPropertyName = "PlatNum";
             column.HeaderText = "Взвод";
             column.Name = "Взвод";
-            column.Width = 320;
+            column.Width = 310;
             dataGridView1.Columns.Add(column);
         }
 
