@@ -34,6 +34,7 @@ namespace CheckList_Konstruktor
                 label5.Text = DataChekList.Check.Inform.Name;
                 tableLayoutPanel1.Visible = true;
                 button1.Visible = true;
+                CreateTable();
             }
             DataChekList.LoadEncrypt();
             шифроватьToolStripMenuItem.Checked = DataChekList.Encrypt;
@@ -253,6 +254,7 @@ namespace CheckList_Konstruktor
         {
             Form1 Form = new Form1();
             Form.ShowDialog();
+            if (DataChekList.Check != null) CreateTable(); 
         }
 
         private void редактироватьПредметыToolStripMenuItem_Click(object sender, EventArgs e)
@@ -304,6 +306,49 @@ namespace CheckList_Konstruktor
         {
             Help help = new Help();
             help.ShowDialog();
+        }
+
+        private void CreateTable()
+        {
+            bindingSource1.DataSource = DataChekList.Check.Tasks;
+            DataGridViewTextBoxColumn column = new DataGridViewTextBoxColumn();
+            column.DataPropertyName = "Name";
+            column.HeaderText = "Название действия";
+            column.Name = "Название действия";
+            column.Width = 200;
+            dataGridView1.Columns.Add(column);
+            column = new DataGridViewTextBoxColumn();
+            column.DataPropertyName = "Description";
+            column.HeaderText = "Порядок выполнения";
+            column.Name = "Порядок выполнения";
+            column.Width = 300;
+            dataGridView1.Columns.Add(column);
+            DataGridViewImageColumn Im = new DataGridViewImageColumn();
+            Im.HeaderText = "Контроль";
+            Im.Width = 100;
+            dataGridView1.Columns.Add(Im);
+            DataGridViewButtonColumn col = new DataGridViewButtonColumn();
+            col.HeaderText = "";
+            col.Name = "Контроль";
+            col.Width = 110;
+            col.ToolTipText = "Добавить изображение";
+            col.Text = "Добавить изображение";
+            col.UseColumnTextForButtonValue = true;
+            dataGridView1.CellContentClick += TableAddPictureClicked;
+            dataGridView1.Columns.Add(col);
+        }
+        private void TableAddPictureClicked(object sender, DataGridViewCellEventArgs e)
+        {
+                var button = (DataGridView)sender;
+                if (button.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+                {
+                    openFileDialog1.Title = "Выберите изображение";
+                    openFileDialog1.Filter = "Изображения (*.jpg)|*.jpg";
+                    if (openFileDialog1.ShowDialog() != DialogResult.OK) return;
+                    var Im = dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value as DataGridViewImageColumn;
+                    Im.Image = new Bitmap(openFileDialog1.FileName);
+                }
+            //MessageBox.Show("Кек");
         }
     }
 }
