@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using System.IO;
+using Word = Microsoft.Office.Interop.Word;
 
 namespace CheckList_Konstruktor
 {
@@ -35,11 +36,17 @@ namespace CheckList_Konstruktor
                 tableLayoutPanel1.Visible = true;
                 button1.Visible = true;
             }
-            DataChekList.LoadEncrypt();
+            //DataChekList.LoadEncrypt();
             шифроватьToolStripMenuItem.Checked = DataChekList.Encrypt;
             if (DataChekList.SaveTrack == "")
             {
                 DataChekList.LoadSaveTrack(DataChekList.Encrypt);
+                while (DataChekList.SaveTrack == "")
+                {
+                    MessageBox.Show("Так как программа запущена в первый раз, обязательно укажите путь сохранения файлов в следующем диалоговом окне!");
+                    RenameSaveTrack form = new RenameSaveTrack();
+                    form.ShowDialog();
+                }
             }
             CreateNewDirectory();
             if (DataChekList.Cource == null)
@@ -232,14 +239,24 @@ namespace CheckList_Konstruktor
 
         private void экспортВWordToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //тестовый блок
+
+            //конец тестового блока
             if (DataChekList.Check != null)
             {
-                FolderBrowserDialog Save = new FolderBrowserDialog();
-                if (Save.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                try
                 {
-                    ReadToCheckList();
-                    DataChekList.Check.ExportToWord(Save.SelectedPath);
-                    DataChekList.Check.Tasks.Clear();
+                    FolderBrowserDialog Save = new FolderBrowserDialog();
+                    if (Save.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    {
+                        ReadToCheckList();
+                        DataChekList.Check.ExportToWord(Save.SelectedPath);
+                        DataChekList.Check.Tasks.Clear();
+                    }
+                }
+                catch (Exception k)
+                {
+                    MessageBox.Show(k.Message);
                 }
             }
             else
@@ -302,7 +319,7 @@ namespace CheckList_Konstruktor
 
         private void Constructor_FormClosed(object sender, FormClosedEventArgs e)
         {
-            DataChekList.SaveEncrypt();
+            //DataChekList.SaveEncrypt();
         }
 
         private void помощьToolStripMenuItem_Click(object sender, EventArgs e)

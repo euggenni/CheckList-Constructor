@@ -36,6 +36,8 @@ namespace CheckList_Konstruktor
         {
             DataChekList.SaveTrack = textBox1.Text;
             DataChekList.SaveSaveTrack(DataChekList.Encrypt);
+            DataChekList.Cource = Subjects.LoadSubList(DataChekList.Encrypt);
+            DataChekList.Platoons = Platoons.LoadPlatList(DataChekList.Encrypt);
             this.Close();
         }
 
