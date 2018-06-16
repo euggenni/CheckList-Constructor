@@ -36,8 +36,9 @@ namespace CheckList_Konstruktor
                 Title title = new Title(textBox2.Text, comboBox1.SelectedItem.ToString(), classNum, richTextBox1.Text, richTextBox2.Text, time, textBox8.Text, richTextBox6.Text, richTextBox3.Text, richTextBox5.Text, richTextBox4.Text);
                 DataChekList.Check = new CheckList(comboBox1.SelectedIndex, title, new List<Task>(), new Marks(textBox3.Text, textBox4.Text, textBox5.Text), checkBox1.Checked);
             }
-            catch (Exception)
+            catch (Exception a)
             {
+                MessageBox.Show("Ошибка создания чек листа" + a.Message);
                 DataChekList.Check = new CheckList();
             }
             this.Close();

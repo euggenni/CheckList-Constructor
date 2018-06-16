@@ -165,11 +165,6 @@
             "AssemblyAsmDisplayName" = "8:Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_851D49D0E8FD0840F847E6EE1F80C94C"
-                    {
-                    "Name" = "8:Newtonsoft.Json.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Newtonsoft.Json.dll"
             "TargetName" = "8:"
@@ -244,16 +239,16 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:CheckListSetup"
-        "ProductCode" = "8:{CA0E2F92-3A5A-46F2-ADE7-AB59C53A529D}"
-        "PackageCode" = "8:{25004C74-CDAB-4E82-A654-B7FF4F2A4CE2}"
+        "ProductName" = "8:CheckListConstructor"
+        "ProductCode" = "8:{28BB51E3-3658-4C58-B095-56A9C67005B0}"
+        "PackageCode" = "8:{E06305DB-1D7B-4C41-863E-8D2DF61AF6BC}"
         "UpgradeCode" = "8:{6E083346-DB05-4636-A6CD-EDB7CEFE35A8}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:0.0.2"
+        "ProductVersion" = "8:0.0.3"
         "Manufacturer" = "8:Izdatel"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -368,7 +363,7 @@
         {
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_69D6AB6C55AD40D6B8FB53E97FC40E51"
             {
-            "Name" = "8:CheckList_Konstruktor"
+            "Name" = "8:Конструктор карточек заданий"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"

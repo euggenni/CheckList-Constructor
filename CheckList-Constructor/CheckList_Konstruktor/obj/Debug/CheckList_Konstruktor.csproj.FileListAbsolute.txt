@@ -67,3 +67,22 @@ E:\Ahinedark WB\Поганая хуйня\CheckList-Constructor\CheckList-Constr
 E:\Ahinedark WB\Поганая хуйня\CheckList-Constructor\CheckList-Constructor\CheckList_Konstruktor\obj\Debug\CheckList_Konstruktor.exe
 E:\Ahinedark WB\Поганая хуйня\CheckList-Constructor\CheckList-Constructor\CheckList_Konstruktor\obj\Debug\CheckList_Konstruktor.pdb
 E:\Ahinedark WB\Поганая хуйня\CheckList-Constructor\CheckList-Constructor\CheckList_Konstruktor\obj\Debug\CheckList_Konstruktor.WordProgress.resources
+C:\Users\1\Documents\GitHub\CheckList-Constructor\CheckList-Constructor\CheckList_Konstruktor\bin\Debug\CheckList_Konstruktor.exe.config
+C:\Users\1\Documents\GitHub\CheckList-Constructor\CheckList-Constructor\CheckList_Konstruktor\obj\Debug\CheckList_Konstruktor.csproj.ResolveComReference.cache
+C:\Users\1\Documents\GitHub\CheckList-Constructor\CheckList-Constructor\CheckList_Konstruktor\obj\Debug\CheckList_Konstruktor.exe
+C:\Users\1\Documents\GitHub\CheckList-Constructor\CheckList-Constructor\CheckList_Konstruktor\obj\Debug\CheckList_Konstruktor.pdb
+C:\Users\1\Documents\GitHub\CheckList-Constructor\CheckList-Constructor\CheckList_Konstruktor\bin\Debug\CheckList_Konstruktor.exe
+C:\Users\1\Documents\GitHub\CheckList-Constructor\CheckList-Constructor\CheckList_Konstruktor\bin\Debug\CheckList_Konstruktor.pdb
+C:\Users\1\Documents\GitHub\CheckList-Constructor\CheckList-Constructor\CheckList_Konstruktor\bin\Debug\Newtonsoft.Json.dll
+C:\Users\1\Documents\GitHub\CheckList-Constructor\CheckList-Constructor\CheckList_Konstruktor\obj\Debug\CheckList_Konstruktor.csprojResolveAssemblyReference.cache
+C:\Users\1\Documents\GitHub\CheckList-Constructor\CheckList-Constructor\CheckList_Konstruktor\obj\Debug\CheckList_Konstruktor.AddCources.resources
+C:\Users\1\Documents\GitHub\CheckList-Constructor\CheckList-Constructor\CheckList_Konstruktor\obj\Debug\CheckList_Konstruktor.AddPlatoon.resources
+C:\Users\1\Documents\GitHub\CheckList-Constructor\CheckList-Constructor\CheckList_Konstruktor\obj\Debug\CheckList_Konstruktor.AddPlatoons.resources
+C:\Users\1\Documents\GitHub\CheckList-Constructor\CheckList-Constructor\CheckList_Konstruktor\obj\Debug\CheckList_Konstruktor.AddPole.resources
+C:\Users\1\Documents\GitHub\CheckList-Constructor\CheckList-Constructor\CheckList_Konstruktor\obj\Debug\CheckList_Konstruktor.Constructor.resources
+C:\Users\1\Documents\GitHub\CheckList-Constructor\CheckList-Constructor\CheckList_Konstruktor\obj\Debug\CheckList_Konstruktor.Form1.resources
+C:\Users\1\Documents\GitHub\CheckList-Constructor\CheckList-Constructor\CheckList_Konstruktor\obj\Debug\CheckList_Konstruktor.Help.resources
+C:\Users\1\Documents\GitHub\CheckList-Constructor\CheckList-Constructor\CheckList_Konstruktor\obj\Debug\CheckList_Konstruktor.Properties.Resources.resources
+C:\Users\1\Documents\GitHub\CheckList-Constructor\CheckList-Constructor\CheckList_Konstruktor\obj\Debug\CheckList_Konstruktor.RenameSaveTrack.resources
+C:\Users\1\Documents\GitHub\CheckList-Constructor\CheckList-Constructor\CheckList_Konstruktor\obj\Debug\CheckList_Konstruktor.WordProgress.resources
+C:\Users\1\Documents\GitHub\CheckList-Constructor\CheckList-Constructor\CheckList_Konstruktor\obj\Debug\CheckList_Konstruktor.csproj.GenerateResource.Cache

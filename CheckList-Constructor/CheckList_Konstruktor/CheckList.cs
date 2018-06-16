@@ -249,9 +249,9 @@ namespace CheckList_Konstruktor
                 {
                     case 1: sname = "№"; break;
                     case 2: sname = "Название действия"; break;
-                    case 3: sname = "Описание последовательности действий"; break;
-                    case 4: sname = "Фото"; break;
-                    case 5: sname = "Отметка"; break;
+                    case 3: sname = "Порядок выполнения"; break;
+                    case 4: sname = "Контроль"; break;
+                    case 5: sname = "Выполнено"; break;
                 }
                 cell.Range.Text = sname;
                 cell.Shading.BackgroundPatternColor = Word.WdColor.wdColorGray25;
@@ -351,7 +351,7 @@ namespace CheckList_Konstruktor
             progress.Visible = false;
         }
 
-        private void Rename(string fileName, bool avers) //меняет тип файла из bin в jpeg и обратно
+        public static void Rename(string fileName, bool avers) //меняет тип файла из bin в jpeg и обратно
         {
             try
             {
