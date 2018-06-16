@@ -90,7 +90,7 @@ namespace CheckList_Konstruktor
             {
                 tableLayoutPanel1.AutoSize = false;
                 tableLayoutPanel1.Height = 445;
-                tableLayoutPanel1.Width += 15;
+                //if (n == 8)tableLayoutPanel1.Width += 15;
                 tableLayoutPanel1.AutoScroll = true;
             }
         }
@@ -541,10 +541,10 @@ namespace CheckList_Konstruktor
             columnStyle.Add(new ColumnStyle(SizeType.Percent, (float)0.5263));
             columnStyle.Add(new ColumnStyle(SizeType.Absolute, 245));
             columnStyle.Add(new ColumnStyle(SizeType.Absolute, 188));*/
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 245));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 188));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, (float)0.13));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, (float)0.25));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, (float)0.47));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, (float)0.15));
             CreateTableHeader();
             /////////////////////////////////////////////
             button1.Visible = true;
@@ -555,11 +555,11 @@ namespace CheckList_Konstruktor
                 AddRichTextBox(1, task.Name);
                 AddRichTextBox(2, task.Description);
                 AddButton(task.Image);
-                if (n > 8)
+                if (n == 8)
                 {
                     tableLayoutPanel1.AutoSize = false;
                     tableLayoutPanel1.Height = 445;
-                    tableLayoutPanel1.Width += 15;
+                    //tableLayoutPanel1.Width += 15;
                     tableLayoutPanel1.AutoScroll = true;
                 }
                 n++;
