@@ -12,63 +12,50 @@ namespace CheckList_Konstruktor
 {
     public partial class AddPole : Form
     {
-        TableLayoutPanel Table;
-        public AddPole(TableLayoutPanel  table)
+        Constructor Constr;
+        public AddPole(Constructor constr)
         {
-            Table = table;
+            Constr = constr;
             InitializeComponent();
         }
 
         private void button2_Click(object sender, EventArgs e) //удаление указанной строки
         {
-            
-            //// не работает
-            /*int number = 0;
+            int number = 0;
             try
             {
                 number = Convert.ToInt32(textBox1.Text);
             }
-            catch (Exception) { }
-            if (number != 0 && number <= Table.RowStyles.Count)
+            catch (Exception) { return; }
+
+            if (number > 0 && number <= DataChekList.Check.Tasks.Count)
             {
-                for (int i = 0; i<Table.ColumnCount;i++)
-                {
-                    if (Table.GetControlFromPosition(i, number)!=null)
-                    {
-                        Table.Controls.Remove(Table.GetControlFromPosition(i, number));
-                    }
-                }
-                for (int i = number+1; i < Table.RowCount; i++)
-                {
-                    for (int j = 0; j < Table.ColumnCount; j++)
-                    {
-                        var control = Table.GetControlFromPosition(j, i);
-                        if (control != null)
-                        {
-                            Table.Controls.Add(control, j, i-1);
-                        }
-                    }
-                }
-                Table.RowStyles.RemoveAt(Table.RowCount - 1);
-                Table.RowCount--;
-                Table.Height-=200;
-                Renumbered();
-            }//*/
+                Constr.ReadToCheckList();
+                DataChekList.Check.Tasks.RemoveAt(number-1);
+                Constr.n = 1;
+                Constr.OpenCheckList();
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)//добавление указанной строки 
         {
             
             ///// не работает 
-            /*int number = 0;
+            int number = 0;
             try
             {
                 number = Convert.ToInt32(textBox1.Text);
             }
-            catch (Exception) { }
-            if (number != 0)
+            catch (Exception) { return;}
+            if (number > 0 && number <= DataChekList.Check.Tasks.Count)
             {
-                Label label = new Label();
+                Constr.ReadToCheckList();
+
+                //DataChekList.Check.Tasks.RemoveAt(number - 1);
+                DataChekList.Check.Tasks.Insert(number - 1, new Task("", ""));
+                Constr.n = 1;
+                Constr.OpenCheckList();
+                /*Label label = new Label();
                 label.Dock = DockStyle.Fill;
                 label.Text = "";
                 label.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -97,9 +84,8 @@ namespace CheckList_Konstruktor
                     Table.Height = 445;
                     Table.Width += 15;
                     Table.AutoScroll = true;
-                }
+                }*/
             }
-            Renumbered();*/
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -108,8 +94,9 @@ namespace CheckList_Konstruktor
         }
         private void Renumbered() // перезаписывает номера строк
         {
+            /*Constr.
             int n = 1;
-            foreach (Control Control in Table.Controls)
+            foreach (Control Control in Constr..Controls)
             {
                 if (Table.GetRow(Control) != 0)
                 {
@@ -119,7 +106,7 @@ namespace CheckList_Konstruktor
                         n++;
                     }
                 }
-            }
+            }*/
         }
         private void AddPictureClicked(object sender, EventArgs e)
         {

@@ -15,7 +15,7 @@ namespace CheckList_Konstruktor
 {
     public partial class Constructor : Form
     {
-        int n = 1; //нумератор строк таблицы
+        public int n = 1; //нумератор строк таблицы
         List<CheckList> CheckLists = new List<CheckList>();
         public Constructor()
         {
@@ -28,14 +28,14 @@ namespace CheckList_Konstruktor
             {
                 label5.Visible = false;
                 tableLayoutPanel1.Visible = false;
-                button1.Visible = false;
+                panel1.Visible = false;
             }
             else
             {
                 label5.Visible = true;
                 label5.Text = DataChekList.Check.Inform.Name;
                 tableLayoutPanel1.Visible = true;
-                button1.Visible = true;
+                panel1.Visible = true;
             }
             DataChekList.LoadEncrypt();
             шифроватьToolStripMenuItem.Checked = DataChekList.Encrypt;
@@ -68,14 +68,14 @@ namespace CheckList_Konstruktor
             {
                 label5.Visible = false;
                 tableLayoutPanel1.Visible = false;
-                button1.Visible = false;
+                panel1.Visible = false;
             }
             else
             {
                 label5.Visible = true;
                 label5.Text = DataChekList.Check.Inform.Name;
                 tableLayoutPanel1.Visible = true;
-                button1.Visible = true;
+                panel1.Visible = true;
                 label5.Left = (this.Width - label5.Width)/2;
             }
         }
@@ -159,6 +159,7 @@ namespace CheckList_Konstruktor
             button.Width = 100;
             button.Height = 60;
             button.Anchor = AnchorStyles.Top;
+            button.BackgroundImageLayout = ImageLayout.Zoom;
             button.Click += AddPictureClicked;
             if (image != null)
             {
@@ -166,10 +167,10 @@ namespace CheckList_Konstruktor
                 {
                     CheckList.Rename(DataChekList.SaveTrack + @"\" +/*Application.StartupPath +*/@"\CheckList\Pictures\" + image, true);
                     Image pic = Image.FromFile(DataChekList.SaveTrack + @"\" +/*Application.StartupPath +*/@"\CheckList\Pictures\" + string.Concat(image.Remove(image.LastIndexOf('.')), ".jpeg"));
-                    CheckList.Rename(DataChekList.SaveTrack + @"\" +/*Application.StartupPath +*/@"\CheckList\Pictures\" + string.Concat(image.Remove(image.LastIndexOf('.')), ".jpeg"), false);
                     button.BackgroundImage = pic;
+                    CheckList.Rename(DataChekList.SaveTrack + @"\" +/*Application.StartupPath +*/@"\CheckList\Pictures\" + string.Concat(image.Remove(image.LastIndexOf('.')), ".jpeg"), false);
                 }
-                catch (Exception) { }
+                catch (Exception c) { MessageBox.Show(c.Message); }
             }
             tableLayoutPanel1.Controls.Add(button, 3, n - 1);
         }
@@ -206,6 +207,7 @@ namespace CheckList_Konstruktor
                     MessageBox.Show("Ошибка сохранения чек листа. " + a.Message);
                 }
                 DataChekList.Check.Tasks.Clear();
+                CloseCheckList();
             }
             else
             {
@@ -213,7 +215,7 @@ namespace CheckList_Konstruktor
             }
         }
 
-        private void ReadToCheckList() //собирает информацию из Control таблицы в чек лист
+        public void ReadToCheckList() //собирает информацию из Control таблицы в чек лист
         {
             Task task = new Task();
             DataChekList.Check.Tasks.Clear();
@@ -315,13 +317,13 @@ namespace CheckList_Konstruktor
 
         private void добавитьудалитьПолеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddPole Pole = new AddPole(tableLayoutPanel1);
+            AddPole Pole = new AddPole(this);
             Pole.Show();
         }
 
         private void добавитьКарточкЗаданияToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form1 Form = new Form1();
+            Form1 Form = new Form1("Create");
             Form.ShowDialog();
         }
 
@@ -426,13 +428,9 @@ namespace CheckList_Konstruktor
                 }
             }*/
         }
-        struct HoldingCell
-        {
-            public Control cntrl;
-            public TableLayoutPanelCellPosition pos;
-        }
         private void PaintChekLists() //формирует элементы для вывода чек листов
         {
+            panel2.Controls.Clear();
             panel2.Visible = true;
             panel2.Dock = DockStyle.Fill;
             int n = 0;
@@ -442,13 +440,15 @@ namespace CheckList_Konstruktor
                 Panel Pan = new Panel();
                 Label TestName = new Label();
                 Button TestOpen = new Button();
-
+                Button TestInform = new Button();
+                Button TestDelete = new Button();
+                //охватывающий блок
                 Pan.BackColor = SystemColors.ControlLight;
                 Pan.Name = "Pan" + n;
                 Pan.Size = new Size(700, 51);
                 Pan.Location = new Point(3, 15+51*(n-1));
                 Pan.Tag = "panelTestInTests";
-
+                //название теста
                 TestName.AutoSize = true;
                 TestName.Font = new Font("Century Gothic", 11.25F);
                 TestName.Location = new Point(3, 15);
@@ -458,7 +458,7 @@ namespace CheckList_Konstruktor
                 TestName.TabStop = true;
                 TestName.Tag = n;
                 TestName.TextAlign = ContentAlignment.MiddleCenter;
-
+                //кнопка открытия содержимого теста
                 TestOpen.FlatStyle = FlatStyle.Flat;
                 TestOpen.Font = new Font("Century Gothic", 11.25F);
                 TestOpen.Location = new Point(485, 5);
@@ -469,13 +469,40 @@ namespace CheckList_Konstruktor
                 TestOpen.Tag = n;
                 TestOpen.TextAlign = ContentAlignment.MiddleCenter;
                 TestOpen.Click += OpenTest;
+                //кнопка открытия информации теста
+                TestInform.FlatStyle = FlatStyle.Flat;
+                TestInform.Font = new Font("Century Gothic", 11.25F);
+                TestInform.Location = new Point(330, 5);
+                TestInform.Name = n.ToString()+"0";
+                TestInform.Size = new Size(150, 40);
+                TestInform.Text = "Информация";
+                TestInform.UseVisualStyleBackColor = true;
+                TestInform.Tag = n+"0";
+                TestInform.TextAlign = ContentAlignment.MiddleCenter;
+                TestInform.Click += OpenInform;
+                //кнопка удаления теста
+                TestDelete.FlatStyle = FlatStyle.Flat;
+                TestDelete.Font = new Font("Century Gothic", 11.25F);
+                TestDelete.Location = new Point(175, 5);
+                TestDelete.Name = n.ToString() + "00";
+                TestDelete.Size = new Size(150, 40);
+                TestDelete.Text = "Удалить";
+                TestDelete.UseVisualStyleBackColor = true;
+                TestDelete.Tag = n + "00";
+                TestDelete.TextAlign = ContentAlignment.MiddleCenter;
+                TestDelete.Click += DeleteTest;
+                ///////////////////////////////////
                 Pan.Show();
                 TestName.Show();
                 TestOpen.Show();
+                TestInform.Show();
+                TestDelete.Show();
 
                 panel2.Controls.Add(Pan);
                 Pan.Controls.Add(TestName);
                 Pan.Controls.Add(TestOpen);
+                Pan.Controls.Add(TestInform);
+                Pan.Controls.Add(TestDelete);
             }
         }
 
@@ -485,10 +512,32 @@ namespace CheckList_Konstruktor
             try
             {
                 DataChekList.Check = CheckLists.ElementAt<CheckList>(Convert.ToInt32(b.Name)-1);
-                //OpenCheckList
             }
-            catch (Exception) { return; }
+            catch (Exception a) { MessageBox.Show(a.Message); return; }
             OpenCheckList();
+        }
+
+        private void OpenInform(object sender, EventArgs e) //событие на открытие информации теста
+        { 
+            Button b = (Button)sender;
+            try
+            {
+                DataChekList.Check = CheckLists.ElementAt<CheckList>((Convert.ToInt32(b.Name) - 1)/10);
+            }
+            catch (Exception a) { MessageBox.Show(a.Message); return; }
+            Form1 Form = new Form1("Update", this);
+            Form.ShowDialog();
+        }
+
+        private void DeleteTest(object sender, EventArgs e) //событие на удаление определенного теста
+        {
+            Button b = (Button)sender;
+            try
+            {
+                DataChekList.Check = CheckLists.ElementAt<CheckList>((Convert.ToInt32(b.Name) - 1) / 100);
+            }
+            catch (Exception a) { MessageBox.Show(a.Message); return; }
+            DeleteCheckList();
         }
 
         private void ReadChekLists() //читает из сохраненной директории все чек листы
@@ -496,6 +545,7 @@ namespace CheckList_Konstruktor
             try
             {
                 String[] Files = Directory.GetFiles(DataChekList.SaveTrack + @"\CheckList\", "*.test");
+                CheckLists.Clear();
                 if (Files.Length != 0)
                 {
                     foreach (string file in Files)
@@ -520,13 +570,14 @@ namespace CheckList_Konstruktor
             }
         }
 
-        private void OpenCheckList() //инициирует открытие чек листа для редактирования полей
+        public void OpenCheckList() //инициирует открытие чек листа для редактирования полей
         {
             panel2.Visible = false;
             label5.Visible = true;
             label5.Left = (this.Width - label5.Width) / 2;
             label5.Text = DataChekList.Check.Inform.Name;
             /////////////////////////////////////////////пересоздаем таблицу
+            //this.Controls.Remove(tableLayoutPanel1);
             tableLayoutPanel1.Dispose();
             tableLayoutPanel1 = new TableLayoutPanel();
             tableLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
@@ -547,7 +598,7 @@ namespace CheckList_Konstruktor
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, (float)0.15));
             CreateTableHeader();
             /////////////////////////////////////////////
-            button1.Visible = true;
+            panel1.Visible = true;
             int n = 1;
             foreach (Task task in DataChekList.Check.Tasks)
             {
@@ -566,13 +617,59 @@ namespace CheckList_Konstruktor
             }
             this.Controls.Add(tableLayoutPanel1);
             tableLayoutPanel1.Show();
+            tableLayoutPanel1.Visible = true;
         }
+
         private void CreateTableHeader() //добавляет шапку таблицы
         { 
             AddLabel("№ действия", 0);
             AddLabel("Название действия", 1);
             AddLabel("Порядок выполнения", 2);
             AddLabel("Контроль", 3);
+        }
+
+        private void CloseCheckList() //инициирует закрытие чек листа
+        {
+            DataChekList.Check = null;
+            n = 1;
+            tableLayoutPanel1.Visible = false;
+            panel1.Visible = false;
+            ReadChekLists();
+            PaintChekLists();
+        }
+
+        public void UpdateListTests()//обновляет список тестов
+        {
+            ReadChekLists();
+            PaintChekLists();
+        }
+
+        private void DeleteCheckList() //удаляет всю информацию о тесте
+        { 
+            DialogResult = MessageBox.Show("Вы точно хотите удалить карточку задания и всю информацию о ней?", "Внимание!", MessageBoxButtons.YesNo);
+            if (DialogResult == System.Windows.Forms.DialogResult.Yes)
+            {
+                //непосредственное удаление файла теста
+                if (File.Exists(DataChekList.SaveTrack + @"\CheckList\" + DataChekList.Check.Inform.Course + " " + DataChekList.Check.Inform.Name + ".test"))
+                {
+                    File.Delete(DataChekList.SaveTrack + @"\CheckList\" + DataChekList.Check.Inform.Course + " " + DataChekList.Check.Inform.Name + ".test");
+                }
+                //удаление связи с предметом
+                if (DataChekList.Cource.SubList.ElementAt<Subject>(DataChekList.Check.Index).CheckListIndexes.Contains(DataChekList.Check.Inform.Course + " " + DataChekList.Check.Inform.Name + ".test"))
+                {
+                    DataChekList.Cource.SubList.ElementAt<Subject>(DataChekList.Check.Index).CheckListIndexes.Remove(DataChekList.Check.Inform.Course + " " + DataChekList.Check.Inform.Name + ".test");
+                }
+                DataChekList.Cource.SaveSubList(DataChekList.Encrypt);
+                //удаление всех изображений, связанных с тестом
+                String[] Files = Directory.GetFiles(DataChekList.SaveTrack + @"\CheckList\Pictures\", DataChekList.Check.Inform.Course + " " + DataChekList.Check.Inform.Name + "*.bin");
+                foreach (string file in Files)
+                {
+                    File.Delete(file);
+                }
+                //
+                DataChekList.Check = null;
+                UpdateListTests();
+            }
         }
     }
 }
