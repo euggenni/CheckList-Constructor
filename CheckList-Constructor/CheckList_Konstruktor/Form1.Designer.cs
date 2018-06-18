@@ -49,25 +49,25 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.label19 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.richTextBox4 = new System.Windows.Forms.RichTextBox();
+            this.richTextBox6 = new System.Windows.Forms.RichTextBox();
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
+            this.richTextBox4 = new System.Windows.Forms.RichTextBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label18 = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.richTextBox6 = new System.Windows.Forms.RichTextBox();
             this.richTextBox5 = new System.Windows.Forms.RichTextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
@@ -299,13 +299,13 @@
             this.label17.TabIndex = 14;
             this.label17.Text = "Тема занятия";
             // 
-            // richTextBox4
+            // richTextBox6
             // 
-            this.richTextBox4.Location = new System.Drawing.Point(149, 105);
-            this.richTextBox4.Name = "richTextBox4";
-            this.richTextBox4.Size = new System.Drawing.Size(144, 97);
-            this.richTextBox4.TabIndex = 13;
-            this.richTextBox4.Text = "";
+            this.richTextBox6.Location = new System.Drawing.Point(206, 391);
+            this.richTextBox6.Name = "richTextBox6";
+            this.richTextBox6.Size = new System.Drawing.Size(260, 96);
+            this.richTextBox6.TabIndex = 5;
+            this.richTextBox6.Text = "";
             // 
             // richTextBox3
             // 
@@ -322,6 +322,15 @@
             this.richTextBox2.Size = new System.Drawing.Size(260, 96);
             this.richTextBox2.TabIndex = 11;
             this.richTextBox2.Text = "";
+            // 
+            // label13
+            // 
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label13.Location = new System.Drawing.Point(4, 391);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(177, 64);
+            this.label13.TabIndex = 4;
+            this.label13.Text = "Материальное обеспечение занятия";
             // 
             // richTextBox1
             // 
@@ -351,15 +360,6 @@
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(40, 20);
             this.textBox6.TabIndex = 7;
-            // 
-            // label15
-            // 
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label15.Location = new System.Drawing.Point(5, 106);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(136, 50);
-            this.label15.TabIndex = 6;
-            this.label15.Text = "Оценка снижается если...";
             // 
             // label14
             // 
@@ -411,14 +411,22 @@
             this.label9.TabIndex = 0;
             this.label9.Text = "Номер занятия";
             // 
-            // label13
+            // richTextBox4
             // 
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label13.Location = new System.Drawing.Point(4, 391);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(177, 64);
-            this.label13.TabIndex = 4;
-            this.label13.Text = "Материальное обеспечение занятия";
+            this.richTextBox4.Location = new System.Drawing.Point(149, 105);
+            this.richTextBox4.Name = "richTextBox4";
+            this.richTextBox4.Size = new System.Drawing.Size(144, 97);
+            this.richTextBox4.TabIndex = 13;
+            this.richTextBox4.Text = "";
+            // 
+            // label15
+            // 
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label15.Location = new System.Drawing.Point(5, 106);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(136, 50);
+            this.label15.TabIndex = 6;
+            this.label15.Text = "Оценка снижается если...";
             // 
             // label8
             // 
@@ -463,14 +471,6 @@
             this.checkBox1.TabIndex = 6;
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
-            // richTextBox6
-            // 
-            this.richTextBox6.Location = new System.Drawing.Point(206, 391);
-            this.richTextBox6.Name = "richTextBox6";
-            this.richTextBox6.Size = new System.Drawing.Size(260, 96);
-            this.richTextBox6.TabIndex = 5;
-            this.richTextBox6.Text = "";
-            // 
             // richTextBox5
             // 
             this.richTextBox5.Location = new System.Drawing.Point(149, 11);
@@ -502,7 +502,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.panel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Создание карточки задания";

@@ -15,8 +15,11 @@ namespace CheckList_Konstruktor
 {
     public partial class Constructor : Form
     {
+        public ComboBox cb1 = new ComboBox();
         public int n = 1; //нумератор строк таблицы
+        public int selectedItem = -1;
         List<CheckList> CheckLists = new List<CheckList>();
+        List<CheckList> cl;
         public Constructor()
         {
             InitializeComponent();
@@ -59,7 +62,8 @@ namespace CheckList_Konstruktor
                 DataChekList.Platoons = Platoons.LoadPlatList(DataChekList.Encrypt);
             }
             ReadChekLists();
-            PaintChekLists();
+            PaintChekLists("");
+            cb1.SelectedIndex = -1;
         }
 
         private void Constructor_Enter(object sender, EventArgs e)
@@ -69,6 +73,9 @@ namespace CheckList_Konstruktor
                 label5.Visible = false;
                 tableLayoutPanel1.Visible = false;
                 panel1.Visible = false;
+                добавитьудалитьПолеToolStripMenuItem.Enabled = false;
+                сохранитьToolStripMenuItem.Enabled = false;
+                экспортВWordToolStripMenuItem.Enabled = false;
             }
             else
             {
@@ -76,7 +83,12 @@ namespace CheckList_Konstruktor
                 label5.Text = DataChekList.Check.Inform.Name;
                 tableLayoutPanel1.Visible = true;
                 panel1.Visible = true;
+                panel2.Visible = false;
                 label5.Left = (this.Width - label5.Width)/2;
+                добавитьудалитьПолеToolStripMenuItem.Enabled = true;
+                сохранитьToolStripMenuItem.Enabled = true;
+                экспортВWordToolStripMenuItem.Enabled = true;
+                //OpenCheckList();
             }
         }
 
@@ -403,13 +415,70 @@ namespace CheckList_Konstruktor
             help.ShowDialog();
         }
         
-        private void PaintChekLists() //формирует элементы для вывода чек листов
+        private void PaintChekLists(string subName) //формирует элементы для вывода чек листов
         {
             panel2.Controls.Clear();
+            if (subName != "")
+            {
+                cl = new List<CheckList>();
+                foreach (CheckList Test in CheckLists)
+                {
+                    if (String.Compare(Test.Inform.Course, subName) == 0)
+                    {
+                        cl.Add(Test);
+                    }
+                }
+            }
+            else
+            {
+                cl = CheckLists;
+            }
             panel2.Visible = true;
             panel2.Dock = DockStyle.Fill;
+            panel2.AutoSize = true;
+            panel2.HorizontalScroll.Maximum = 0;
+            panel2.AutoScroll = false;
+            panel2.VerticalScroll.Visible = false;
+            panel2.AutoScroll = true;
             int n = 0;
-            foreach (CheckList Test in CheckLists)
+            Panel p1 = new Panel();
+            Label l1 = new Label();
+            cb1 = new ComboBox();
+            p1.BackColor = SystemColors.ControlLight;
+            p1.Name = "Pan" + n;
+            p1.Size = new Size(700, 51);
+            p1.Location = new Point(3, 15);
+            p1.Tag = "panelTestInTests";
+            l1.AutoSize = true;
+            l1.Font = new Font("Century Gothic", 11.25F);
+            l1.Location = new Point(3, 15);
+            l1.Name = "CbLabel";
+            l1.Size = new Size(146, 20);
+            l1.Text = "Предмет ";
+            l1.TabStop = true;
+            l1.Tag = n;
+            l1.TextAlign = ContentAlignment.MiddleCenter;
+            cb1.FlatStyle = FlatStyle.Flat;
+            cb1.Font = new Font("Century Gothic", 11.25F);
+            cb1.Location = new Point(300, 5);
+            cb1.Name = "cb";
+            cb1.Size = new Size(310, 40);
+            cb1.Text = "Выберите предмет";
+            cb1.Tag = n;
+            p1.Show();
+            l1.Show();
+            cb1.Show();
+
+            panel2.Controls.Add(p1);
+            p1.Controls.Add(l1);
+            p1.Controls.Add(cb1);
+            foreach (Subject Cource in DataChekList.Cource.SubList)
+            {
+                cb1.Items.Add(Cource.Name);
+            }
+            cb1.SelectedIndex = selectedItem;
+            cb1.SelectedIndexChanged += Sic;
+            foreach (CheckList Test in cl)
             {
                 n++;
                 Panel Pan = new Panel();
@@ -421,7 +490,7 @@ namespace CheckList_Konstruktor
                 Pan.BackColor = SystemColors.ControlLight;
                 Pan.Name = "Pan" + n;
                 Pan.Size = new Size(700, 51);
-                Pan.Location = new Point(3, 15+51*(n-1));
+                Pan.Location = new Point(3, 15+51*(n));
                 Pan.Tag = "panelTestInTests";
                 //название теста
                 TestName.AutoSize = true;
@@ -481,12 +550,18 @@ namespace CheckList_Konstruktor
             }
         }
 
+        private void Sic(object sender, EventArgs e)
+        {
+            selectedItem = cb1.SelectedIndex;
+            PaintChekLists(cb1.SelectedItem.ToString());
+        }
+
         private void OpenTest(object sender, EventArgs e) //событие на открытие теста
         {
             Button b = (Button)sender;
             try
             {
-                DataChekList.Check = CheckLists.ElementAt<CheckList>(Convert.ToInt32(b.Name)-1);
+                DataChekList.Check = cl.ElementAt<CheckList>(Convert.ToInt32(b.Name)-1);
             }
             catch (Exception a) { MessageBox.Show(a.Message); return; }
             OpenCheckList();
@@ -497,7 +572,7 @@ namespace CheckList_Konstruktor
             Button b = (Button)sender;
             try
             {
-                DataChekList.Check = CheckLists.ElementAt<CheckList>((Convert.ToInt32(b.Name) - 1)/10);
+                DataChekList.Check = cl.ElementAt<CheckList>((Convert.ToInt32(b.Name)-1) /10);
             }
             catch (Exception a) { MessageBox.Show(a.Message); return; }
             Form1 Form = new Form1("Update", this);
@@ -509,7 +584,7 @@ namespace CheckList_Konstruktor
             Button b = (Button)sender;
             try
             {
-                DataChekList.Check = CheckLists.ElementAt<CheckList>((Convert.ToInt32(b.Name) - 1) / 100);
+                DataChekList.Check = cl.ElementAt<CheckList>((Convert.ToInt32(b.Name) -1) / 100);
             }
             catch (Exception a) { MessageBox.Show(a.Message); return; }
             DeleteCheckList();
@@ -551,6 +626,11 @@ namespace CheckList_Konstruktor
             label5.Visible = true;
             label5.Left = (this.Width - label5.Width) / 2;
             label5.Text = DataChekList.Check.Inform.Name;
+            //this.n = 1;
+            добавитьудалитьПолеToolStripMenuItem.Enabled = true;
+            сохранитьToolStripMenuItem.Enabled = true;
+            экспортВWordToolStripMenuItem.Enabled = true;
+            добавитьКарточкЗаданияToolStripMenuItem.Enabled = false;
             /////////////////////////////////////////////пересоздаем таблицу
             //this.Controls.Remove(tableLayoutPanel1);
             tableLayoutPanel1.Dispose();
@@ -609,14 +689,20 @@ namespace CheckList_Konstruktor
             n = 1;
             tableLayoutPanel1.Visible = false;
             panel1.Visible = false;
+            добавитьудалитьПолеToolStripMenuItem.Enabled = false;
+            сохранитьToolStripMenuItem.Enabled = false;
+            экспортВWordToolStripMenuItem.Enabled = false;
+            добавитьКарточкЗаданияToolStripMenuItem.Enabled = true;
             ReadChekLists();
-            PaintChekLists();
+            selectedItem = -1;
+            PaintChekLists("");
         }
 
         public void UpdateListTests()//обновляет список тестов
         {
             ReadChekLists();
-            PaintChekLists();
+            selectedItem = -1;
+            PaintChekLists("");
             panel1.Visible = false;
         }
 

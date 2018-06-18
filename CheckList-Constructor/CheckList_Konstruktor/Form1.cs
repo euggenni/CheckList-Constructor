@@ -75,11 +75,11 @@ namespace CheckList_Konstruktor
                     foreach (Task line in DataChekList.Check.Tasks)
                     {
                         if (line.Image != null)
-                        { 
-                            
+                        {
+                            line.Image = line.Image.Replace(DataChekList.Check.Inform.Course + " " + DataChekList.Check.Inform.Name, comboBox1.SelectedItem.ToString() + " " + textBox2.Text);
                         }
                     }
-                    //////1
+                    //////
                     DataChekList.Check.Index = comboBox1.SelectedIndex;
                     DataChekList.Check.Inform = title;
                     DataChekList.Check.Notes = new Marks(textBox3.Text, textBox4.Text, textBox5.Text);
@@ -102,6 +102,7 @@ namespace CheckList_Konstruktor
                     }
                     DataChekList.Check.Tasks.Clear();
                     form.UpdateListTests();
+                    DataChekList.Check = null;
                 }
             }
             catch (Exception a)
@@ -114,6 +115,7 @@ namespace CheckList_Konstruktor
                 if (State == "Update")
                 {
                     MessageBox.Show("Ошибка изменения чек листа" + a.Message);
+                    DataChekList.Check = null;
                 }
             }
             this.Close();
