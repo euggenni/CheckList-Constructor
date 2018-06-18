@@ -165,10 +165,28 @@ namespace CheckList_Konstruktor
             {
                 try
                 {
-                    CheckList.Rename(DataChekList.SaveTrack + @"\" +/*Application.StartupPath +*/@"\CheckList\Pictures\" + image, true);
-                    Image pic = Image.FromFile(DataChekList.SaveTrack + @"\" +/*Application.StartupPath +*/@"\CheckList\Pictures\" + string.Concat(image.Remove(image.LastIndexOf('.')), ".jpeg"));
+                    //CheckList.Rename(DataChekList.SaveTrack + @"\" +/*Application.StartupPath +*/@"\CheckList\Pictures\" + image, true);
+                    var fileOfInterest = DataChekList.SaveTrack + @"\" +/*Application.StartupPath +*/@"\CheckList\Pictures\" + image/*string.Concat(image.Remove(image.LastIndexOf('.')), ".jpeg")*/;
+                    byte[] imageData = new byte[0];
+                    byte[] buffer = new byte[255];
+                    int total_byte_count = 0;
+                    using (FileStream fos = new FileStream(fileOfInterest, FileMode.Open))
+                    {
+                        int readCount = 0;
+                        do
+                        {
+                            readCount = fos.Read(buffer, 0, buffer.Length);
+                            Array.Resize(ref imageData, imageData.Length + readCount);
+                            Array.Copy(buffer, 0, imageData, total_byte_count, readCount);
+                            total_byte_count += readCount;
+                        }
+                        while (readCount != 0);
+                    }
+                    MemoryStream ms = new MemoryStream(imageData);
+                    Image pic = Image.FromStream(ms);
+                    //Image pic = Image.FromFile(DataChekList.SaveTrack + @"\" +/*Application.StartupPath +*/@"\CheckList\Pictures\" + string.Concat(image.Remove(image.LastIndexOf('.')), ".jpeg"));
                     button.BackgroundImage = pic;
-                    CheckList.Rename(DataChekList.SaveTrack + @"\" +/*Application.StartupPath +*/@"\CheckList\Pictures\" + string.Concat(image.Remove(image.LastIndexOf('.')), ".jpeg"), false);
+                    //CheckList.Rename(DataChekList.SaveTrack + @"\" +/*Application.StartupPath +*/@"\CheckList\Pictures\" + string.Concat(image.Remove(image.LastIndexOf('.')), ".jpeg"), false);
                 }
                 catch (Exception c) { MessageBox.Show(c.Message); }
             }
@@ -384,50 +402,7 @@ namespace CheckList_Konstruktor
             Help help = new Help();
             help.ShowDialog();
         }
-
-        //тестовый блок
-        private void секретнаяКнопкаToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            /*Control c;
-            List<HoldingCell> temHolding = new List<HoldingCell>();
-            HoldingCell cell;
-            int index = 1;
-            {
-                var withBlock = tableLayoutPanel1;
-
-                for (int col = 0; col <= withBlock.ColumnCount - 1; col++)
-                {
-                    c = withBlock.GetControlFromPosition(column: col, row: index);
-                    if (c != null)
-                    {
-                        withBlock.Controls.RemoveByKey(c.Name);
-                        c.Dispose();
-                    }
-                }
-
-                for (int row = index + 1; row <= tableLayoutPanel1.RowCount - 1; row++)
-                {
-                    for (int col = 0; col <= tableLayoutPanel1.ColumnCount - 1; col++)
-                    {
-                        cell = new HoldingCell();
-                        cell.cntrl = withBlock.GetControlFromPosition(col, row);
-                        cell.pos = new TableLayoutPanelCellPosition(col, row - 1);
-                        temHolding.Add(cell);
-                    }
-                }
-
-                withBlock.RowStyles.RemoveAt(index: index);
-                withBlock.RowCount -= 1;
-
-                foreach (var cel in temHolding)
-                {
-                    if (cel.cntrl != null)
-                    {
-                        withBlock.SetCellPosition(cel.cntrl, cel.pos);
-                    }
-                }
-            }*/
-        }
+        
         private void PaintChekLists() //формирует элементы для вывода чек листов
         {
             panel2.Controls.Clear();
@@ -642,6 +617,7 @@ namespace CheckList_Konstruktor
         {
             ReadChekLists();
             PaintChekLists();
+            panel1.Visible = false;
         }
 
         private void DeleteCheckList() //удаляет всю информацию о тесте

@@ -71,7 +71,15 @@ namespace CheckList_Konstruktor
                     {
                         MessageBox.Show("Ошибка сохранения" + b.Message);
                     }
-                    //////
+                    //////изменение ссылок на изображения в тесте
+                    foreach (Task line in DataChekList.Check.Tasks)
+                    {
+                        if (line.Image != null)
+                        { 
+                            
+                        }
+                    }
+                    //////1
                     DataChekList.Check.Index = comboBox1.SelectedIndex;
                     DataChekList.Check.Inform = title;
                     DataChekList.Check.Notes = new Marks(textBox3.Text, textBox4.Text, textBox5.Text);
