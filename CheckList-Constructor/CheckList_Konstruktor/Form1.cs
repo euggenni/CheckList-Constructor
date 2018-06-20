@@ -32,15 +32,37 @@ namespace CheckList_Konstruktor
         private void button1_Click(object sender, EventArgs e)
         {
             int classNum = 0;
+            int time = 0;
+            int Excellent = 0;
+            int Good = 0;
+            int Satisfactory = 0;
             try
             {
                 classNum = Convert.ToInt32(textBox6.Text);
-            }
-            catch (Exception){}
-            int time = 0;
-            try
-            {
                 time = Convert.ToInt32(textBox7.Text);
+                Excellent = Convert.ToInt32(textBox3.Text);
+                Good = Convert.ToInt32(textBox4.Text);
+                Satisfactory = Convert.ToInt32(textBox5.Text);
+                if (classNum < 0)
+                {
+                    classNum = 0;
+                }
+                if (time < 0)
+                {
+                    time = 0;
+                }
+                if (Excellent < 0)
+                {
+                    Excellent = 0;
+                }
+                if (Good < 0)
+                {
+                    Good = 0;
+                }
+                if (Satisfactory < 0)
+                {
+                    Satisfactory = 0;
+                }
             }
             catch (Exception){}
             try
@@ -48,7 +70,8 @@ namespace CheckList_Konstruktor
                 Title title = new Title(textBox2.Text, comboBox1.SelectedItem.ToString(), classNum, richTextBox1.Text, richTextBox2.Text, time, textBox8.Text, richTextBox6.Text, richTextBox3.Text, richTextBox5.Text, richTextBox4.Text);
                 if (State == "Create")
                 {
-                    DataChekList.Check = new CheckList(comboBox1.SelectedIndex, title, new List<Task>(), new Marks(textBox3.Text, textBox4.Text, textBox5.Text), checkBox1.Checked);
+                    DataChekList.Check = new CheckList(comboBox1.SelectedIndex, title, new List<Task>(), new Marks(Excellent, Good, Satisfactory), checkBox1.Checked);
+                    form.OpenCheckList();
                 }
                 if (State == "Update")
                 {

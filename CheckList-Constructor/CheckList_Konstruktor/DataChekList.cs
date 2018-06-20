@@ -15,7 +15,7 @@ namespace CheckList_Konstruktor
         private static Subjects cource = null; //хранит предметы
         private static Platoons platoons = null; //хранит взвода
         private static string saveTrack = ""; //хранит путь сохранения
-        private static bool encrypt = false; //проверяет, шифровать или нет
+        private static bool encrypt = true; //проверяет, шифровать или нет
 
         public static CheckList Check
         {

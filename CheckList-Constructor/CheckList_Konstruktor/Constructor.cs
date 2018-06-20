@@ -40,8 +40,9 @@ namespace CheckList_Konstruktor
                 tableLayoutPanel1.Visible = true;
                 panel1.Visible = true;
             }
-            DataChekList.LoadEncrypt();
+            //DataChekList.LoadEncrypt();
             шифроватьToolStripMenuItem.Checked = DataChekList.Encrypt;
+            шифроватьToolStripMenuItem.Enabled = false;
             if (DataChekList.SaveTrack == "")
             {
                 DataChekList.LoadSaveTrack(DataChekList.Encrypt);
@@ -75,7 +76,6 @@ namespace CheckList_Konstruktor
                 panel1.Visible = false;
                 добавитьудалитьПолеToolStripMenuItem.Enabled = false;
                 сохранитьToolStripMenuItem.Enabled = false;
-                экспортВWordToolStripMenuItem.Enabled = false;
             }
             else
             {
@@ -87,7 +87,6 @@ namespace CheckList_Konstruktor
                 label5.Left = (this.Width - label5.Width)/2;
                 добавитьудалитьПолеToolStripMenuItem.Enabled = true;
                 сохранитьToolStripMenuItem.Enabled = true;
-                экспортВWordToolStripMenuItem.Enabled = true;
                 //OpenCheckList();
             }
         }
@@ -158,7 +157,7 @@ namespace CheckList_Konstruktor
             button2.Width = 100;
             button2.Height = 60;
             button2.Anchor = AnchorStyles.Top;*/
-            button.Click += AddPictureClicked;
+            button.MouseUp += AddPictureClicked;
             tableLayoutPanel1.Controls.Add(button, 3, n - 1);
         }
 
@@ -172,7 +171,7 @@ namespace CheckList_Konstruktor
             button.Height = 60;
             button.Anchor = AnchorStyles.Top;
             button.BackgroundImageLayout = ImageLayout.Zoom;
-            button.Click += AddPictureClicked;
+            button.MouseUp += AddPictureClicked;
             if (image != null)
             {
                 try
@@ -205,15 +204,27 @@ namespace CheckList_Konstruktor
             tableLayoutPanel1.Controls.Add(button, 3, n - 1);
         }
 
-        private void AddPictureClicked(object sender, EventArgs e)
+        private void AddPictureClicked(object sender, MouseEventArgs e)
         {
-            openFileDialog1.Title = "Выберите изображение";
-            openFileDialog1.Filter = "Изображения (*.jpg)|*.jpg";
-            if (openFileDialog1.ShowDialog() != DialogResult.OK) return;
             Button b = (Button)sender;
-            b.Text = "";
-            b.BackgroundImage = new Bitmap(openFileDialog1.FileName);
-            b.BackgroundImageLayout = ImageLayout.Zoom;
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                if (Clipboard.GetImage() != null)
+                {
+                    b.Text = "";
+                    b.BackgroundImageLayout = ImageLayout.Zoom;
+                    b.BackgroundImage = (Image)Clipboard.GetImage();
+                }
+            }
+            else
+            {
+                openFileDialog1.Title = "Выберите изображение";
+                openFileDialog1.Filter = "Изображения (*.jpg)|*.jpg";
+                if (openFileDialog1.ShowDialog() != DialogResult.OK) return;
+                b.Text = "";
+                b.BackgroundImage = new Bitmap(openFileDialog1.FileName);
+                b.BackgroundImageLayout = ImageLayout.Zoom;
+            }
         }
 
         private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e) //сохранение
@@ -226,11 +237,17 @@ namespace CheckList_Konstruktor
                 try
                 {
                     File.WriteAllText(DataChekList.SaveTrack + @"\CheckList\" + DataChekList.Check.Inform.Course + " " + DataChekList.Check.Inform.Name + ".test", Data);
-                    if (!DataChekList.Cource.SubList.ElementAt<Subject>(DataChekList.Check.Index).CheckListIndexes.Contains(DataChekList.Check.Inform.Course + " " + DataChekList.Check.Inform.Name + ".test"))//*/
+                    if(!DataChekList.Cource.SubList.ElementAt<Subject>(DataChekList.Check.Index).CheckListIndexes.Contains(DataChekList.Check.Inform.Course + " " + DataChekList.Check.Inform.Name + ".test"))//*/
                     {
                         DataChekList.Cource.SubList.ElementAt<Subject>(DataChekList.Check.Index).CheckListIndexes.Add(DataChekList.Check.Inform.Course + " " + DataChekList.Check.Inform.Name + ".test");
                         DataChekList.Cource.SaveSubList(DataChekList.Encrypt);
                     }
+                    DirectoryInfo dirinfo = new DirectoryInfo(DataChekList.SaveTrack + @"\CheckList\Exports\");
+                    if(dirinfo.Exists)
+                    {
+                        dirinfo.CreateSubdirectory(DataChekList.Check.Inform.Course);
+                    }
+                    DataChekList.Check.ExportToWord(DataChekList.SaveTrack + @"\CheckList\Exports\" + DataChekList.Check.Inform.Course + "\\");
                 }
                 catch (Exception a)
                 {
@@ -317,7 +334,7 @@ namespace CheckList_Konstruktor
             return Name;
         }
 
-        private void экспортВWordToolStripMenuItem_Click(object sender, EventArgs e)
+        /*private void экспортВWordToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //тестовый блок
 
@@ -344,7 +361,7 @@ namespace CheckList_Konstruktor
                 MessageBox.Show("Карточка задания не создана!");
             }
         }
-
+        */
         private void добавитьудалитьПолеToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddPole Pole = new AddPole(this);
@@ -353,7 +370,7 @@ namespace CheckList_Konstruktor
 
         private void добавитьКарточкЗаданияToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form1 Form = new Form1("Create");
+            Form1 Form = new Form1("Create", this);
             Form.ShowDialog();
         }
 
@@ -389,6 +406,7 @@ namespace CheckList_Konstruktor
                         dirinfo.Create();
                         dirinfo.CreateSubdirectory(@"Inform");
                         dirinfo.CreateSubdirectory(@"Pictures");
+                        dirinfo.CreateSubdirectory(@"Exports");
                     }
                 }
                 catch (Exception e)
@@ -400,13 +418,13 @@ namespace CheckList_Konstruktor
 
         private void шифроватьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            шифроватьToolStripMenuItem.Checked = !шифроватьToolStripMenuItem.Checked;
+            /*шифроватьToolStripMenuItem.Checked = !шифроватьToolStripMenuItem.Checked;
             DataChekList.Encrypt = шифроватьToolStripMenuItem.Checked;//*/
         }
 
         private void Constructor_FormClosed(object sender, FormClosedEventArgs e)
         {
-            DataChekList.SaveEncrypt();
+            //DataChekList.SaveEncrypt();
         }
 
         private void помощьToolStripMenuItem_Click(object sender, EventArgs e)
@@ -629,7 +647,6 @@ namespace CheckList_Konstruktor
             //this.n = 1;
             добавитьудалитьПолеToolStripMenuItem.Enabled = true;
             сохранитьToolStripMenuItem.Enabled = true;
-            экспортВWordToolStripMenuItem.Enabled = true;
             добавитьКарточкЗаданияToolStripMenuItem.Enabled = false;
             /////////////////////////////////////////////пересоздаем таблицу
             //this.Controls.Remove(tableLayoutPanel1);
@@ -691,7 +708,6 @@ namespace CheckList_Konstruktor
             panel1.Visible = false;
             добавитьудалитьПолеToolStripMenuItem.Enabled = false;
             сохранитьToolStripMenuItem.Enabled = false;
-            экспортВWordToolStripMenuItem.Enabled = false;
             добавитьКарточкЗаданияToolStripMenuItem.Enabled = true;
             ReadChekLists();
             selectedItem = -1;
