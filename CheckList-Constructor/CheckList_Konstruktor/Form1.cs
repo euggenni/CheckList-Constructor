@@ -65,6 +65,11 @@ namespace CheckList_Konstruktor
                 }
             }
             catch (Exception){}
+            if (comboBox1.SelectedIndex < 0)
+            {
+                MessageBox.Show("Не выбран предмет", "Ошибка");
+                return;
+            }
             try
             {
                 Title title = new Title(textBox2.Text, comboBox1.SelectedItem.ToString(), classNum, richTextBox1.Text, richTextBox2.Text, time, textBox8.Text, richTextBox6.Text, richTextBox3.Text, richTextBox5.Text, richTextBox4.Text);
@@ -126,6 +131,7 @@ namespace CheckList_Konstruktor
                     DataChekList.Check.Tasks.Clear();
                     form.UpdateListTests();
                     DataChekList.Check = null;
+
                 }
             }
             catch (Exception a)
@@ -174,6 +180,14 @@ namespace CheckList_Konstruktor
             foreach (Subject Cource in DataChekList.Cource.SubList)
             {
                 comboBox1.Items.Add(Cource.Name);
+            }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (State == "Update")
+            {
+                DataChekList.Check = null;
             }
         }
     }

@@ -407,6 +407,7 @@ namespace CheckList_Konstruktor
                         dirinfo.CreateSubdirectory(@"Inform");
                         dirinfo.CreateSubdirectory(@"Pictures");
                         dirinfo.CreateSubdirectory(@"Exports");
+                        dirinfo.CreateSubdirectory(@"Results");
                     }
                 }
                 catch (Exception e)
@@ -526,7 +527,8 @@ namespace CheckList_Konstruktor
                 TestOpen.Location = new Point(485, 5);
                 TestOpen.Name = n.ToString();
                 TestOpen.Size = new Size(150, 40);
-                TestOpen.Text = "Открыть тест";
+                //TestOpen.Te
+                TestOpen.Text = "Открыть";
                 TestOpen.UseVisualStyleBackColor = true;
                 TestOpen.Tag = n;
                 TestOpen.TextAlign = ContentAlignment.MiddleCenter;
@@ -537,7 +539,7 @@ namespace CheckList_Konstruktor
                 TestInform.Location = new Point(330, 5);
                 TestInform.Name = n.ToString()+"0";
                 TestInform.Size = new Size(150, 40);
-                TestInform.Text = "Информация";
+                TestInform.Text = "Заголовок";
                 TestInform.UseVisualStyleBackColor = true;
                 TestInform.Tag = n+"0";
                 TestInform.TextAlign = ContentAlignment.MiddleCenter;
@@ -747,6 +749,46 @@ namespace CheckList_Konstruktor
                 //
                 DataChekList.Check = null;
                 UpdateListTests();
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e) //закрывает чек лист
+        {
+            CloseCheckList();
+        }
+
+        private void button3_Click(object sender, EventArgs e) //готово
+        {
+            if (DataChekList.Check != null)
+            {
+                ReadToCheckList();
+                String Data = JsonConvert.SerializeObject(DataChekList.Check);
+                if (DataChekList.Encrypt) Data = Sini4ka.Flying(Data, "синяя синичка");
+                try
+                {
+                    File.WriteAllText(DataChekList.SaveTrack + @"\CheckList\" + DataChekList.Check.Inform.Course + " " + DataChekList.Check.Inform.Name + ".test", Data);
+                    if (!DataChekList.Cource.SubList.ElementAt<Subject>(DataChekList.Check.Index).CheckListIndexes.Contains(DataChekList.Check.Inform.Course + " " + DataChekList.Check.Inform.Name + ".test"))//*/
+                    {
+                        DataChekList.Cource.SubList.ElementAt<Subject>(DataChekList.Check.Index).CheckListIndexes.Add(DataChekList.Check.Inform.Course + " " + DataChekList.Check.Inform.Name + ".test");
+                        DataChekList.Cource.SaveSubList(DataChekList.Encrypt);
+                    }
+                    DirectoryInfo dirinfo = new DirectoryInfo(DataChekList.SaveTrack + @"\CheckList\Exports\");
+                    if (dirinfo.Exists)
+                    {
+                        dirinfo.CreateSubdirectory(DataChekList.Check.Inform.Course);
+                    }
+                    DataChekList.Check.ExportToWord(DataChekList.SaveTrack + @"\CheckList\Exports\" + DataChekList.Check.Inform.Course + "\\");
+                }
+                catch (Exception a)
+                {
+                    MessageBox.Show("Ошибка сохранения чек листа. " + a.Message);
+                }
+                DataChekList.Check.Tasks.Clear();
+                CloseCheckList();
+            }
+            else
+            {
+                MessageBox.Show("Карточка задания не создана!");
             }
         }
     }
